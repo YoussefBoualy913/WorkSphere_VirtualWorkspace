@@ -1,2 +1,11 @@
-const r=document.querySelector('#h');
-console.log(r);
+const workers=[];
+
+function addworker(){
+ const modal=document.querySelector('.modal');
+//  console.log(modal);
+ 
+    modal.style.display='flex';
+}
+
+
+
