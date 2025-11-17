@@ -18,3 +18,6 @@
     gap: 1rem;
     margin-bottom: 1rem;
 }
+#form-errors{
+    color: red;
+}

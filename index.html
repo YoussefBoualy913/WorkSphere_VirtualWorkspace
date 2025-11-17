@@ -113,24 +113,27 @@
             <div class="modal__body h-[95%] " id="modal-body">
                 <form class="form flex flex-col justify-between h-full p-1 mb-4" id="worker-form">
                     <div class="forminput flex flex-col">
-                        <div class="alert--error" id="form-errors"></div>
+                        
                         <div class="form__group flex flex-col  gap-1">
                             <label class="form__label text-sm font-mono" for="worker-name">Name:</label>
+                            
                             <input type="text" id="worker-name"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
                                 placeholder="Enter worker name">
+                                <div class="alert--error text-xs" id="name-errors"></div>
 
                         </div>
                         <div class="form__group flex flex-col  gap-1">
                             <label class="form__label text-sm" for="worker-role">Role:</label>
                             <select
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 text-sm" id="role">
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 text-sm" id="worker-role">
                                 <option value="security" class="">security</option>
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="IT Guy">IT Guy</option>
                                 <option value="Cleaning">Cleaning</option>
                                 <option value="Other">Other</option>
                             </select>
+                             <div class="alert--error text-xs" id="role-errors"></div>
 
                         </div>
            
@@ -140,39 +143,44 @@
                             <input type="url" id="worker-image"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="https://example.com/image.jpg">
+                                 <div class="alert--error text-xs" id="image-errors"></div>
                             <div id="show-image"></div>
                         </div>
 
                         <!-- add exprience -->
                         <div class="flex flex-col  gap-4">
                             <p class="text-sm">Exepirience:</p>
-                                <div class="flex flex-col  gap-4">
-                            <!-- <div class="bg-gray-100  p-5 rounded-sm shadow-md">
+                                <div class="cntinaireExpireince flex flex-col  gap-4">
+                            <!-- <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
                                     <label class="form__label text-sm" for="worker-name">Company:</label>
                                     <input type="text" id="company"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
-                                        placeholder="Enter worker name" required>
+                                        placeholder="Enter worker name">
+                                         <div class="alert--error text-xs" id="company-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">Role:</label>
-                                    <input type="text" id="role"
+                                    <input type="text" id="exprole"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
-                                        placeholder="Enter role expirience worker" required>
+                                        placeholder="Enter role expirience worker">
+                                         <div class="alert--error text-xs" id="exprole-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">From:</label>
-                                    <input type="date" id="from"
+                                    <input type="date" id="Dfrom"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
-                                        placeholder="Enter worker name" required>
+                                        placeholder="Enter worker name">
+                                         <div class="alert--error text-xs" id="Dfrom-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">To:</label>
-                                    <input type="date" id="To"
+                                    <input type="date" id="DTo"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
-                                        placeholder="Enter worker name" required>
+                                        placeholder="Enter worker name" >
+                                         <div class="alert--error text-xs" id="DTo-errors"></div>
                                 </div>
 
                             </div> -->
                              </div>
-                            <button type="button" class="bg-green-500 w-33 h-9 rounded-md text-white">add
+                            <button type="button" class="addExperience bg-green-500 w-33 h-9 rounded-md text-white">add
                                 Experience</button>
 
                         </div>
@@ -182,6 +190,7 @@
                             <input type="email" id="worker-email"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="exemple@gmail.com" >
+                                 <div class="alert--error text-xs" id="email-errors"></div>
                         </div>
 
                         <div class="form__group flex flex-col gap-1">
@@ -189,6 +198,7 @@
                             <input type="tel" id="worker-tel"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="0645432312" >
+                                 <div class="alert--error text-xs" id="tele-errors"></div>
                         </div>
                     </div>
                     <div id="errur"></div>
@@ -203,7 +213,7 @@
             </div>
         </div>
     </div> 
-     <div class="flex fixed top-0 left-0 justify-center z-100 w-full h-full p-2" id="add-modal">
+     <!-- <div class="flex fixed top-0 left-0 justify-center z-100 w-full h-full p-2" id="add-modal">
         <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
         <div class="modal__content w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
             <header class="modal__header flex justify-between">
@@ -214,7 +224,7 @@
                 <button type="submit" class="btn  w-full h-10 rounded-md text-white" id="saveworker">Close</button>
             </div>
         </div>
-    </div> 
+    </div>  -->
     <script src="script.js"></script>
 </body>
 
