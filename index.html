@@ -65,26 +65,27 @@
     </div>
     <div class="modal fixed top-0 left-0 flex justify-center z-100 w-full h-full p-2 " id="add-modal">
         <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <div class="modal__content border w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 ">
+        <div class="modal__content w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
             <header class="modal__header flex justify-between">
-                <h3 class="modal__title" id="modal-title">hgj</h3>
+                <h3 class="modal__title text-2xl" id="modal-title">Add worker</h3>
                 <button class="modal__close" data-action="close-modal">&times;</button>
             </header>
             <div class="modal__body h-[95%] " id="modal-body">
-                <form class="form flex flex-col gap-2 justify-between h-full p-1" id="worker-form">
+                <form class="form flex flex-col gap-4 justify-between h-full p-1 mb-4" id="worker-form">
                     <div>
                         <div class="alert--error" id="form-errors"></div>
                         <div class="form__group flex flex-col  gap-1">
-                            <label class="form__label" for="worker-name">Name:</label>
+                            <label class="form__label text-sm font-mono" for="worker-name">Name:</label>
                             <input type="text" id="worker-name"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
                                 placeholder="Enter worker name" required>
 
                         </div>
                         <div class="form__group flex flex-col  gap-1">
-                            <label class="form__label" for="worker-role">Role:</label>
-                            <select class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 ">
-                                <option value="security">security</option>
+                            <label class="form__label text-sm" for="worker-role">Role:</label>
+                            <select
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 text-sm">
+                                <option value="security" class="">security</option>
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="IT Guy">IT Guy</option>
                                 <option value="Cleaning">Cleaning</option>
@@ -95,7 +96,7 @@
 
 
                         <div class="form__group flex flex-col  gap-1">
-                            <label class="form__label" for="worker-image">Image URL</label>
+                            <label class="form__label text-sm" for="worker-image">Image URL</label>
                             <input type="url" id="worker-image"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="https://example.com/image.jpg">
@@ -103,31 +104,42 @@
                         </div>
 
                         <!-- add exprience -->
-                        <div>
-                            <p>Exepirience:</p>
-                            <div class="bg-gray-100 p-1.5 rounded-sm shadow-md">
-                                <div class="form__group flex flex-col gap-1">
-                                    <label class="form__label" for="worker-name">Company:</label>
+                        <div class="flex flex-col  gap-4">
+                            <p class="text-sm">Exepirience:</p>
+                                <div class="flex flex-col  gap-4">
+                            <!-- <div class="bg-gray-100  p-5 rounded-sm shadow-md">
+                                <div class="form__group flex flex-col gap-1 ">
+                                    <label class="form__label text-sm" for="worker-name">Company:</label>
                                     <input type="text" id="company"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name" required>
 
-                                </div>
-                                 <div class="form__group flex flex-col gap-1">
-                                    <label class="form__label" for="worker-name">Company:</label>
-                                    <input type="text" id="company"
+                                    <label class="form__label text-sm" for="worker-name">Role:</label>
+                                    <input type="text" id="role"
+                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter role expirience worker" required>
+
+                                    <label class="form__label text-sm" for="worker-name">From:</label>
+                                    <input type="date" id="from"
                                         class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name" required>
 
+                                    <label class="form__label text-sm" for="worker-name">To:</label>
+                                    <input type="date" id="To"
+                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name" required>
                                 </div>
-                            </div>
-                            <button type="button" class="bg-green-500 w-33 h-9 rounded-md text-white">add Experience</button>
+
+                            </div> -->
+                             </div>
+                            <button type="button" class="bg-green-500 w-33 h-9 rounded-md text-white">add
+                                Experience</button>
 
                         </div>
 
 
                         <div class="form__group flex flex-col  gap-1">
-                            <label class="form__label" for="event-seats">Email:</label>
+                            <label class="form__label text-sm" for="event-seats">Email:</label>
                             <input type="email" id="worker-email"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="exemple@gmail.com" required>
@@ -135,7 +147,7 @@
 
 
                         <div class="form__group flex flex-col gap-1">
-                            <label class="form__label" for="event-price">Phone:</label>
+                            <label class="form__label text-sm" for="event-price">Phone:</label>
                             <input type="tel" id="worker-tel"
                                 class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="0645432312" required>
@@ -144,8 +156,7 @@
                     <div class="form__actions flex gap-3 h-10">
                         <button type="submit" class="btn bg-blue-700 w-[35%] h-10 rounded-md text-white">Save
                             worker</button>
-                        <button type="reset"
-                            class="btn bg-gray-400 w-[35%] h-10 rounded-md text-white">Cancel</button>
+                        <button type="reset" class="btn bg-gray-400 w-[35%] h-10 rounded-md text-white">Cancel</button>
                     </div>
 
 
