@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="src/output.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app flex h-screen bg-blue-100">
+        <aside id="aside-staff-membres" class=" w-2xs h-screen  bg-amber-50">
+            <div id="staff-membres-contenaire" class="flex flex-col justify-between h-full p-7">
+                <div class="flex flex-col gap-5">
+                    <h1 id="title-staff-membres " class="text-blue-600 font-bold text-lg">Staff Members</h1>
+                    <div id="staff-membres " class="flex flex-col gap-3">
+                        <!-- add workers -->
+                        <!-- <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200">
+                            <img src="124043.png" alt="" class="profil-image rounded-3xl" width="50" height="50">
+                            <div class="flex flex-col justify-center">
+                                <p class="name text-sm">hggfdsdfg</p>
+                                <p class="role text-xs">kjhgyu</p>
+                            </div>
+                            <button class="m-auto text-amber-500">Edit</button>
+                        </div> -->
+                    </div>
+                </div>
+                <button id="add-new-worker" class="bg-green-500 p-2 rounded-xl text-white">Add New Worcker</button>
+            </div>
+
+        </aside>
+        <main class=" grow p-6">
+            <section class="h-full bg-[url(/Capturew.png)] bg-no-repeat bg-cover flex justify-between">
+
+                <div class="h-full w-[38.6%]">
+                    <div id="conference-room" class=" w-full h-[34.5%]">
+
+                    </div>
+                    <div id="reception-room" class=" w-full h-[65.5%]">
+
+                    </div>
+                </div>
+
+                <div class="h-full w-[45.6%] flex flex-col justify-between">
+                    <div class="w-full h-[36%] flex">
+                        <div id="servers-room" class="h-full w-[50%]">
+
+                        </div>
+                        <div id="security-room" class="h-full w-[50%]">
+
+                        </div>
+                    </div>
+                    <div class="w-full h-[33%] flex">
+                        <div id="staff-room" class="h-full w-[50%]">
+
+                        </div>
+                        <div id="vault-room" class="h-full w-[50%]">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="modal fixed top-0 left-0 flex justify-center z-100 w-full h-full p-2 " id="add-modal">
+        <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
+        <div class="modal__content border w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 ">
+            <header class="modal__header flex justify-between">
+                <h3 class="modal__title" id="modal-title">hgj</h3>
+                <button class="modal__close" data-action="close-modal">&times;</button>
+            </header>
+            <div class="modal__body h-[95%] " id="modal-body">
+                <form class="form flex flex-col gap-2 justify-between h-full p-1" id="worker-form">
+                    <div>
+                        <div class="alert--error" id="form-errors"></div>
+                        <div class="form__group flex flex-col  gap-1">
+                            <label class="form__label" for="worker-name">Name:</label>
+                            <input type="text" id="worker-name"
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
+                                placeholder="Enter worker name" required>
+
+                        </div>
+                        <div class="form__group flex flex-col  gap-1">
+                            <label class="form__label" for="worker-role">Role:</label>
+                            <select class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 ">
+                                <option value="security">security</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="IT Guy">IT Guy</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form__group flex flex-col  gap-1">
+                            <label class="form__label" for="worker-image">Image URL</label>
+                            <input type="url" id="worker-image"
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                placeholder="https://example.com/image.jpg">
+                            <div id="show-image"></div>
+                        </div>
+
+                        <!-- add exprience -->
+                        <div>
+                            <p>Exepirience:</p>
+                            <div class="bg-gray-100 p-1.5 rounded-sm shadow-md">
+                                <div class="form__group flex flex-col gap-1">
+                                    <label class="form__label" for="worker-name">Company:</label>
+                                    <input type="text" id="company"
+                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name" required>
+
+                                </div>
+                                 <div class="form__group flex flex-col gap-1">
+                                    <label class="form__label" for="worker-name">Company:</label>
+                                    <input type="text" id="company"
+                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name" required>
+
+                                </div>
+                            </div>
+                            <button type="button" class="bg-green-500 w-33 h-9 rounded-md text-white">add Experience</button>
+
+                        </div>
+
+
+                        <div class="form__group flex flex-col  gap-1">
+                            <label class="form__label" for="event-seats">Email:</label>
+                            <input type="email" id="worker-email"
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                placeholder="exemple@gmail.com" required>
+                        </div>
+
+
+                        <div class="form__group flex flex-col gap-1">
+                            <label class="form__label" for="event-price">Phone:</label>
+                            <input type="tel" id="worker-tel"
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                placeholder="0645432312" required>
+                        </div>
+                    </div>
+                    <div class="form__actions flex gap-3 h-10">
+                        <button type="submit" class="btn bg-blue-700 w-[35%] h-10 rounded-md text-white">Save
+                            worker</button>
+                        <button type="reset"
+                            class="btn bg-gray-400 w-[35%] h-10 rounded-md text-white">Cancel</button>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
