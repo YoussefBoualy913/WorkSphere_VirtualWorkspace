@@ -36,23 +36,25 @@
          
                 <div class="h-full w-[38.6%]">
                     
-                    <div id="conference-room" class=" w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
+                    <div id="conference-room" class="room w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
+                        <p class="position">conference</p>
                         <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
-                        <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
+                         <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-xs">hggfdsdfg</p>
                                 <p class="role text-xs">kjhgyu</p>
                             </div>
                             <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center text-white"><span>x</span></button>
-                        </div> -->
-                       
+                        </div>  -->
+                        
                          
                         </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600">+</button>
+                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('conference')">+</button>
                     </div>
                     
-                    <div id="reception-room" class=" w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
+                    <div id="reception-room" class="room w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
+                         <p class="position">reception</p>
                         <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
                         <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
@@ -71,14 +73,16 @@
 
                 <div class="h-full w-[45.6%] flex flex-col justify-between">
                     <div class="w-full h-[36%] flex">
-                        <div id="servers-room" class="h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="servers-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                             <p class="position">servers</p>
                              <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
                       
                          
                         </div>
                          <button class="text-white w-8 h-8 rounded-md bg-blue-600">+</button>
                         </div>
-                        <div id="security-room" class="h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="security-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                             <p class="position">security</p>
                               <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
                     
                         </div>
@@ -86,13 +90,15 @@
                         </div>
                     </div>
                     <div class="w-full h-[33%] flex">
-                        <div id="staff-room" class="h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="staff-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                             <p class="position">staff</p>
                              <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
                     
                         </div>
                          <button class="text-white w-8 h-8 rounded-md bg-blue-600">+</button>
                         </div>
-                        <div id="vault-room" class="h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="vault-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                             <p class="position">vault</p>
                             <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
                     
                         </div>
@@ -118,9 +124,9 @@
                             <label class="form__label text-sm font-mono" for="worker-name">Name:</label>
                             
                             <input type="text" id="worker-name"
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
+                                class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
                                 placeholder="Enter worker name">
-                                <div class="alert--error text-xs" id="name-errors"></div>
+                                <div class="errors text-xs" id="name-errors"></div>
 
                         </div>
                         <div class="form__group flex flex-col  gap-1">
@@ -133,17 +139,17 @@
                                 <option value="Cleaning">Cleaning</option>
                                 <option value="Other">Other</option>
                             </select>
-                             <div class="alert--error text-xs" id="role-errors"></div>
+                             <div class="errors text-xs" id="role-errors"></div>
 
                         </div>
            
 
-                        <div class="form__group flex flex-col  gap-1">
+                        <div class="form__group flex flex-col  gap-2">
                             <label class="form__label text-sm" for="worker-image">Image URL</label>
                             <input type="url" id="worker-image"
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="https://example.com/image.jpg">
-                                 <div class="alert--error text-xs" id="image-errors"></div>
+                                 <div class="errors text-xs" id="image-errors"></div>
                             <div id="show-image"></div>
                         </div>
 
@@ -188,17 +194,17 @@
                         <div class="form__group flex flex-col  gap-1">
                             <label class="form__label text-sm" for="event-seats">Email:</label>
                             <input type="email" id="worker-email"
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="exemple@gmail.com" >
-                                 <div class="alert--error text-xs" id="email-errors"></div>
+                                 <div class="errors text-xs" id="email-errors"></div>
                         </div>
 
                         <div class="form__group flex flex-col gap-1">
                             <label class="form__label text-sm" for="event-price">Phone:</label>
                             <input type="tel" id="worker-tel"
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
+                                class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="0645432312" >
-                                 <div class="alert--error text-xs" id="tele-errors"></div>
+                                 <div class="errors text-xs" id="tele-errors"></div>
                         </div>
                     </div>
                     <div id="errur"></div>
@@ -220,7 +226,7 @@
                 <h3 class="modal__title text-2xl text-blue-500" id="modal-title">Select Worker to Assing</h3>
                 <button class="modal__close" data-action="close-modal">&times;</button>
             </header>
-            <div class="modal__body h-[95%] " id="modal-body">
+            <div class="modal__body h-[95%] " id="modal-woker">
                 <button type="submit" class="btn  w-full h-10 rounded-md text-white" id="saveworker">Close</button>
             </div>
         </div>

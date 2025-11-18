@@ -8,11 +8,14 @@ function addworker(){
 }
 document.querySelector('#add-new-worker').addEventListener('click',addworker)
 document.querySelector('#saveworker').addEventListener('click',(e)=>{
+
     const worker=validationworker(e)
+    if(worker){
     workers.push(worker);
     showworker(worker)
  const modal=document.querySelector('.modal');
 modal.style.display='none';
+    }
 })
 document.querySelector('.modal__close').addEventListener('click',()=>{
     const modal=document.querySelector('.modal');
@@ -59,26 +62,7 @@ function validationworker(e) {
         return;
 
     }
-   
-
-    if (!regexsemail.test(workeremail.value)) {
-        const emailerrors=document.querySelector('#email-errors')
-        emailerrors.innerHTML = "email invalide! ";
-        emailerrors.style.color='red';
-        workeremail.style.border='1px solid red';
-        return;
-
-    }
-
-    if (!regexstele.test(workertele.value)) {
-        const teleerrors=document.querySelector('#tele-errors');
-        teleerrors.innerHTML = "telephone invalide! ";
-         teleerrors.style.color='red';
-        workertele.style.border='1px solid red';
-        return;
-
-    }
-    let expiriences = [];
+   let expiriences = [];
     const Expireince = document.querySelectorAll('.Expireince');
     for (const Expir of Expireince) {
 
@@ -101,6 +85,7 @@ function validationworker(e) {
                 exproleerrors.innerHTML = "role invalide! ";
                  exproleerrors.style.color='red';
                 Expireince__role.style.border='1px solid red';
+
                 return;
 
             }
@@ -122,6 +107,13 @@ function validationworker(e) {
                 return;
 
             }
+            if(new Date(Expireince__DTo.value)<=new Date(Expireince__Dfrom.value)){
+              const DToerrors=document.querySelector('#DTo-errors');
+                DToerrors.innerHTML = "dateTo doit etre superieur a dateFrom! ";
+                 DToerrors.style.color='red';
+                Expireince__DTo.style.border='1px solid red';
+                return;
+            }
             const expirience = {
                 company: Expireince__company.value,
                 exprole: Expireince__role.value,
@@ -132,6 +124,25 @@ function validationworker(e) {
 
         }
     }
+
+    if (!regexsemail.test(workeremail.value)) {
+        const emailerrors=document.querySelector('#email-errors')
+        emailerrors.innerHTML = "email invalide! ";
+        emailerrors.style.color='red';
+        workeremail.style.border='1px solid red';
+        return;
+
+    }
+
+    if (!regexstele.test(workertele.value)) {
+        const teleerrors=document.querySelector('#tele-errors');
+        teleerrors.innerHTML = "telephone invalide! ";
+         teleerrors.style.color='red';
+        workertele.style.border='1px solid red';
+        return;
+
+    }
+    
     const worker = {
         id: counteur,
         name: workername.value,
@@ -145,6 +156,16 @@ function validationworker(e) {
     document.getElementById('worker-form').reset();
     return worker;
 }
+//remove errur message
+function removeErrurmessage(){
+const input =document.querySelectorAll('.input');
+input.forEach(inp => {
+  inp.addEventListener('focus',(e)=>{
+    e.target.style='none';
+     e.target.nextElementSibling.innerHTML = "";
+
+})})}
+removeErrurmessage();
 //add experience  function
 function addexperience(){
     const cntinaireExpireince=document.querySelector('.cntinaireExpireince');
@@ -153,37 +174,51 @@ function addexperience(){
                                 <div class="form__group flex flex-col gap-1 ">
                                     <label class="form__label text-sm" for="worker-name">Company:</label>
                                     <input type="text" id="company"
-                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name">
-                                         <div class="alert--error text-xs" id="company-errors"></div>
+                                         <div class="errors text-xs" id="company-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">Role:</label>
                                     <input type="text" id="exprole"
-                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter role expirience worker">
-                                         <div class="alert--error text-xs" id="exprole-errors"></div>
+                                         <div class="errors text-xs" id="exprole-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">From:</label>
                                     <input type="date" id="Dfrom"
-                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name">
-                                         <div class="alert--error text-xs" id="Dfrom-errors"></div>
+                                         <div class="errors text-xs" id="Dfrom-errors"></div>
 
                                     <label class="form__label text-sm" for="worker-name">To:</label>
                                     <input type="date" id="DTo"
-                                        class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name" >
-                                         <div class="alert--error text-xs" id="DTo-errors"></div>
+                                         <div class="errors text-xs" id="DTo-errors"></div>
                                 </div>
 
                             </div>
     `
+    removeErrurmessage();
 }
 document.querySelector('.addExperience').addEventListener('click',addexperience)
 
+//chowimage in form
+const workerimage = document.getElementById('worker-image')
+workerimage.addEventListener('input', () => {
+    if (workerimage.value) {
+        document.getElementById('show-image').innerHTML = `
+<img src='${workerimage.value}' width="100px" height="100px" class="">
+`
+    }
+    if (!workerimage.value) {
+        document.getElementById('show-image').innerHTML = '';
+    }
+})
 
 //showworker function
 function showworker(worker){
+
     const staf=document.getElementById('staf');
     staf.innerHTML+=`
      <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200">
@@ -196,4 +231,13 @@ function showworker(worker){
                         </div> 
     `
 
+}
+
+
+
+//addworkerroom function
+ function addworkerroom(room){
+     const modelworker=document.getElementById('modal-woker');
+
+    
 }

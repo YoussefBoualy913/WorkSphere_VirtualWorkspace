@@ -21,3 +21,17 @@
 #form-errors{
     color: red;
 }
+.position{
+    position: absolute;
+    top: 8%;
+    color: rgb(82, 82, 82);
+}
+.room{
+    position: relative;
+}
+.image{
+    border-radius: 50%;
+}
+.rte{
+    background-color: brown;
+}
