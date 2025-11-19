@@ -1,4 +1,5 @@
-const workers=[];
+const workers=[],workersna=[];
+
 const counteur=1;
 
 function addworker(){
@@ -12,7 +13,8 @@ document.querySelector('#saveworker').addEventListener('click',(e)=>{
     const worker=validationworker(e)
     if(worker){
     workers.push(worker);
-    showworker(worker)
+    workersna.push(worker);
+    showworker(workersna);
  const modal=document.querySelector('.modal');
 modal.style.display='none';
     }
@@ -30,7 +32,7 @@ function validationworker(e) {
     const workeremail = document.querySelector('#worker-email');
     const workertele = document.querySelector('#worker-tel');
     const regexname = /^(?!\s*$)[A-Za-zÀ-ÖØ-öø-ÿ0-9 ,.'-]{3,100}$/
-    const regeximage = /^(https?:\/\/(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:\/[^\s]*)?(?:\.(?:png|jpg|jpeg|gif|svg|webp))?\/?)$/
+    const regeximage = /^(?:https?:\/\/(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:\/[^\s]*)?(?:\.(?:png|jpg|jpeg|gif|svg|webp))?\/?)?$/
     const regexsemail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const regexstele = /^(?:\+212|0)([5-7])\d{8}$/
     const regexdate =/^\d{4}-\d{2}-\d{2}$/
@@ -68,12 +70,12 @@ function validationworker(e) {
 
         if (Expir) {
 
-            const Expireince__company = Expir.querySelector('#company')
-            const Expireince__role = Expir.querySelector('#exprole')
-            const Expireince__Dfrom = Expir.querySelector('#Dfrom')
-            const Expireince__DTo = Expir.querySelector('#DTo')
+            const Expireince__company = Expir.children[0].children[0].children[1];
+            const Expireince__role =  Expir.children[0].children[1].children[1];
+            const Expireince__Dfrom = Expir.children[0].children[2].children[1];
+            const Expireince__DTo =  Expir.children[0].children[3].children[1];
             if (!regexname.test(Expireince__company.value)) {
-              const componyerrors=document.querySelector('#company-errors');
+              const componyerrors=Expireince__company.nextElementSibling;
                 componyerrors.innerHTML = "company invalide! ";
                  componyerrors.style.color='red';
                 Expireince__company.style.border='1px solid red';
@@ -81,7 +83,7 @@ function validationworker(e) {
 
             }
             if (!regexname.test(Expireince__role.value)) {
-               const exproleerrors=document.querySelector('#exprole-errors');
+               const exproleerrors=Expireince__role.nextElementSibling;
                 exproleerrors.innerHTML = "role invalide! ";
                  exproleerrors.style.color='red';
                 Expireince__role.style.border='1px solid red';
@@ -90,9 +92,7 @@ function validationworker(e) {
 
             }
             if (!regexdate.test(Expireince__Dfrom.value)) {
-                console.log(Expireince__Dfrom.value);
-                
-                const Dfromerrors=document.querySelector('#Dfrom-errors');
+                const Dfromerrors=Expireince__Dfrom.nextElementSibling;
                 Dfromerrors.innerHTML = "datefrom invalide! ";
                  Dfromerrors.style.color='red';
                 Expireince__Dfrom.style.border='1px solid red';
@@ -100,7 +100,7 @@ function validationworker(e) {
 
             }
              if (!regexdate.test(Expireince__DTo.value)) {
-                const DToerrors=document.querySelector('#DTo-errors');
+                const DToerrors=Expireince__DTo.nextElementSibling;
                 DToerrors.innerHTML = "dateto invalide! ";
                  DToerrors.style.color='red';
                 Expireince__DTo.style.border='1px solid red';
@@ -108,7 +108,7 @@ function validationworker(e) {
 
             }
             if(new Date(Expireince__DTo.value)<=new Date(Expireince__Dfrom.value)){
-              const DToerrors=document.querySelector('#DTo-errors');
+              const DToerrors=Expireince__DTo.nextElementSibling;
                 DToerrors.innerHTML = "dateTo doit etre superieur a dateFrom! ";
                  DToerrors.style.color='red';
                 Expireince__DTo.style.border='1px solid red';
@@ -142,12 +142,13 @@ function validationworker(e) {
         return;
 
     }
+
     
     const worker = {
         id: counteur,
         name: workername.value,
         role: workerrole.value,
-        image: workerimage.value,
+        image: workerimage.value || "https://avatar.iran.liara.run/public",
         email: workeremail.value,
         telephone: workertele.value,
         expirience: expiriences
@@ -172,29 +173,34 @@ function addexperience(){
     cntinaireExpireince.innerHTML+=`
      <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
+                                     <div class="flex flex-col gap-1">
                                     <label class="form__label text-sm" for="worker-name">Company:</label>
                                     <input type="text" id="company"
                                         class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name">
                                          <div class="errors text-xs" id="company-errors"></div>
-
+                                     </div>
+                                     <div class="flex flex-col gap-1">
                                     <label class="form__label text-sm" for="worker-name">Role:</label>
                                     <input type="text" id="exprole"
                                         class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter role expirience worker">
                                          <div class="errors text-xs" id="exprole-errors"></div>
-
+                                     </div>
+                                     <div class="flex flex-col gap-1">
                                     <label class="form__label text-sm" for="worker-name">From:</label>
                                     <input type="date" id="Dfrom"
                                         class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name">
                                          <div class="errors text-xs" id="Dfrom-errors"></div>
-
+                                      </div>
+                                      <div class="flex flex-col gap-1">
                                     <label class="form__label text-sm" for="worker-name">To:</label>
                                     <input type="date" id="DTo"
                                         class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
                                         placeholder="Enter worker name" >
                                          <div class="errors text-xs" id="DTo-errors"></div>
+                                         </div>
                                 </div>
 
                             </div>
@@ -217,20 +223,23 @@ workerimage.addEventListener('input', () => {
 })
 
 //showworker function
-function showworker(worker){
+function showworker(workerna){
 
     const staf=document.getElementById('staf');
+     staf.innerHTML ='';
+     
+     workerna.forEach(work =>{
     staf.innerHTML+=`
      <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200">
-                            <img src="${worker.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
+                            <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
                             <div class="flex flex-col justify-center">
-                                <p class="name text-sm">${worker.name}</p>
-                                <p class="role text-xs">${worker.role}</p>
+                                <p class="name text-sm">${work.name}</p>
+                                <p class="role text-xs">${work.role}</p>
                             </div>
                             <button class="m-auto text-amber-500">Edit</button>
                         </div> 
     `
-
+     })
 }
 
 
@@ -238,6 +247,57 @@ function showworker(worker){
 //addworkerroom function
  function addworkerroom(room){
      const modelworker=document.getElementById('modal-woker');
+      const choix = room;
+   
+    switch (choix) {
+        case "conference":
+            modelworker.innerHTML='';
+             workersna.forEach(work =>{
+    modelworker.innerHTML+=`
+     <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" data-id="${work.id}" data-room="${choix}" onclick='assingworker(this.dataset.room,this.dataset.id)'>
+                            <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
+                            <div class="flex flex-col justify-center">
+                                <p class="name text-sm">${work.name}</p>
+                                <p class="role text-xs">${work.role}</p>
+                            </div>
+                           
+                        </div> 
+    `
+     })
+            break;
 
     
+}
+document.getElementById('assingmodal').style.display='flex';
+
+ }
+ document.getElementById('closeassing').addEventListener('click',()=>{
+    document.getElementById('assingmodal').style.display='none';
+ })
+ 
+//
+function assingworker(choix,id){
+
+const   workeras = workersna.filter(work => work.id=id);
+const index= workersna.indexOf(workeras[0]);
+console.log(index);
+
+
+  switch (choix) {
+    case "conference":
+      const  conferenceroom=   document.getElementById('conference-room-worker');
+      conferenceroom.innerHTML+=`
+      <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
+                            <img src="" alt="${workeras[0].image}" class="profil-image rounded-3xl" width="30" height="30">
+                            <div class="flex flex-col justify-center">
+                                <p class="name text-xs">${workeras[0].name}</p>
+                                <p class="role text-xs">${workeras[0].role}</p>
+                            </div>
+                            <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center text-white"><span>x</span></button>
+                        </div>  
+      `
+    workersna.splice(index,1);
+    showworker(workersna);
+    break;
+  }
 }

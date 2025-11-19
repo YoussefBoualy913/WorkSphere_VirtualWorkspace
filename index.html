@@ -137,6 +137,7 @@
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="IT Guy">IT Guy</option>
                                 <option value="Cleaning">Cleaning</option>
+                                <option value="Manager">Manager</option>
                                 <option value="Other">Other</option>
                             </select>
                              <div class="errors text-xs" id="role-errors"></div>
@@ -219,18 +220,17 @@
             </div>
         </div>
     </div> 
-     <!-- <div class="flex fixed top-0 left-0 justify-center z-100 w-full h-full p-2" id="add-modal">
+     <div class="fixed top-0 left-0 justify-center items-center z-100 w-full h-full p-2" id="assingmodal">
         <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <div class="modal__content w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
+        <div class="modal__content w-[30%]  rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
             <header class="modal__header flex justify-between">
                 <h3 class="modal__title text-2xl text-blue-500" id="modal-title">Select Worker to Assing</h3>
-                <button class="modal__close" data-action="close-modal">&times;</button>
             </header>
-            <div class="modal__body h-[95%] " id="modal-woker">
-                <button type="submit" class="btn  w-full h-10 rounded-md text-white" id="saveworker">Close</button>
+            <div class="modal__body h-[95%] flex flex-col gap-2" id="modal-woker">
             </div>
+                <button type="submit" class="btn bg-amber-700 w-full h-10 rounded-md text-white" id="closeassing">Close</button>
         </div>
-    </div>  -->
+    </div> 
     <script src="script.js"></script>
 </body>
 
