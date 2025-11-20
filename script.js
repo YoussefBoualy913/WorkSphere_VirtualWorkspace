@@ -1,27 +1,59 @@
-const workers = [], workersna = [];
+let workers = [], workersna = [];
 
-let counteur = 1;
+let counteur ;
 
+// Save/load from localStorage
+function loadData() {
+
+    if (JSON.parse(localStorage.getItem('workers'))) {
+        workers = JSON.parse(localStorage.getItem('workers'))
+    }
+    if (JSON.parse(localStorage.getItem('workersna'))) {
+        workersna = JSON.parse(localStorage.getItem('workersna'))
+    }
+}
+
+
+function saveData() {
+    localStorage.setItem('workers', JSON.stringify(workers))
+    localStorage.setItem('workersna', JSON.stringify(workersna))
+}
+// INITIALIZATION
+function init() {
+    loadData();
+    showworker(workersna);
+   
+    let maxid = 0;
+    workers.forEach(et => {
+        if (et.id > maxid) {
+            maxid = et.id;
+        }
+    })
+    counteur = maxid + 1;
+}
+document.addEventListener('DOMContentLoaded', init);
 function addworker() {
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
 
 }
 document.querySelector('#add-new-worker').addEventListener('click', addworker)
-document.querySelector('#saveworker').addEventListener('click', (e) => {
-
+const btnsaveworker =document.querySelector('#saveworker');
+btnsaveworker.addEventListener('click', (e) => {
+if(btnsaveworker.textContent == "Save worker"){
     const worker = validationworker(e)
     if (worker) {
         
         
         workers.push(worker);
         workersna.push(worker);
-        console.log(workersna);
+        saveData();
         
         showworker(workersna);
         const modal = document.querySelector('.modal');
         modal.style.display = 'none';
     }
+}
 })
 document.querySelector('.modal__close').addEventListener('click', () => {
     const modal = document.querySelector('.modal');
@@ -177,7 +209,7 @@ removeErrurmessage();
 //add experience  function
 function addexperience() {
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
-    cntinaireExpireince.innerHTML+=`
+    cntinaireExpireince.insertAdjacentHTML('beforeend',`
     
      <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
@@ -211,14 +243,14 @@ function addexperience() {
                                          </div>
                                 </div>
 
-                            </div>`
+                            </div>`)
                             
     
     removeErrurmessage();
 }
 document.querySelector('.addExperience').addEventListener('click', addexperience)
 
-//chowimage in form
+//showimage in form
 const workerimage = document.getElementById('worker-image')
 workerimage.addEventListener('input', () => {
     if (workerimage.value) {
@@ -245,7 +277,7 @@ function showworker(workerna) {
                                 <p class="name text-sm">${work.name}</p>
                                 <p class="role text-xs">${work.role}</p>
                             </div>
-                            <button class="m-auto text-amber-500">Edit</button>
+                            <button class="btnedit m-auto text-amber-500" data-id="${work.id}">Edit</button>
                         </div> 
     `
     })
@@ -389,4 +421,100 @@ function show_assig_inroom(workeras,assingin){
             </div> 
 
       `
+}
+
+const staf=document.querySelector('#staf');
+console.log(staf);
+// btnedit.forEach(btn=>{
+    
+    
+    staf.addEventListener('click',(e)=>{
+       workerid=e.target.dataset.id;
+       editEvent(workerid);
+    })
+// })
+
+function editEvent(workerid) {
+
+    workersna.forEach(work => {
+        if (work.id == workerid) {
+            index = workersna.indexOf(work);
+
+        }
+    })
+    const form = document.querySelector('#worker-form');
+    const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
+    form.querySelector('#worker-name').value = workersna[index].name;
+    form.querySelector('#worker-role').value = workersna[index].role;
+    form.querySelector('#worker-image').value = workersna[index].image;
+    form.querySelector('#worker-email').value = workersna[index].email;
+    form.querySelector('#worker-tel').value = workersna[index].telephone;
+    
+    if (workersna[index].expirience) {
+        cntinaireExpireince.innerHTML = '';
+        workersna[index].expirience.forEach((work) => {
+
+            cntinaireExpireince.insertAdjacentHTML('beforeend',`
+    <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
+                                <div class="form__group flex flex-col gap-1 ">
+                                     <div class="flex flex-col gap-1">
+                                    <label class="form__label text-sm" for="worker-name">Company:</label>
+                                    <input type="text" id="company" value="${work.company}"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name">
+                                         <div class="errors text-xs" id="company-errors"></div>
+                                     </div>
+                                     <div class="flex flex-col gap-1">
+                                    <label class="form__label text-sm" for="worker-name">Role:</label>
+                                    <input type="text" id="exprole" value="${work.exprole}"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter role expirience worker">
+                                         <div class="errors text-xs" id="exprole-errors"></div>
+                                     </div>
+                                     <div class="flex flex-col gap-1">
+                                    <label class="form__label text-sm" for="worker-name">From:</label>
+                                    <input type="date" id="Dfrom" value="${work.datefrom}"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name">
+                                         <div class="errors text-xs" id="Dfrom-errors"></div>
+                                      </div>
+                                      <div class="flex flex-col gap-1">
+                                    <label class="form__label text-sm" for="worker-name">To:</label>
+                                    <input type="date" id="DTo" value="${work.dateTo}"
+                                        class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 bg-white"
+                                        placeholder="Enter worker name" >
+                                         <div class="errors text-xs" id="DTo-errors"></div>
+                                         </div>
+                                </div>
+
+                            </div>
+`)
+
+        })
+        
+    }
+
+    const modal = document.querySelector('.modal');
+    modal.style.display = 'flex';
+    const btnedit =document.querySelector('#saveworker');
+    const modaltitle =document.querySelector('#modal-title');
+
+    btnedit.textContent = "Edit";
+    modaltitle.textContent="Edit worker";
+    btnedit.addEventListener('click', (e) => {
+
+        if (btnedit.textContent == "Edit") {
+         let    worker=validationworker(e);
+           worker.id = workersna[index].id;
+           workersna[index] = worker;
+
+        btnedit.textContent = "Save worker";
+        modaltitle.textContent="Add worker";
+         modal.style.display = 'none';
+         saveData();
+         showworker(workersna);
+        }
+
+    })
+
 }
