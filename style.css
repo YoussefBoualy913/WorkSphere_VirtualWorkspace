@@ -38,3 +38,20 @@
 #assingmodal{
     display: none;
 }
+.fontsans{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  margin-right:0.5rem ;
+}
+.Experience{
+    font-size: 120%;
+    padding-left: 5px;
+    
+}
+.colortext{
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+    color: rgb(0, 119, 255);
+}
+section{
+    background-size: 100% 100%;
+}

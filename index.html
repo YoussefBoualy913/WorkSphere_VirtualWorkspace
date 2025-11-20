@@ -31,15 +31,16 @@
             </div>
 
         </aside>
-        <main class=" grow p-6">
-            <section class="h-full bg-[url(/Capturew.png)] bg-no-repeat bg-cover flex justify-between">
-         
+        <main class="h-screen grow p-6">
+            <section class="h-full bg-[url(/Capturew.png)] bg-no-repeat  flex justify-between">
+
                 <div class="h-full w-[38.6%]">
-                    
-                    <div id="conference-room" class="room w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
+
+                    <div id="conference-room"
+                        class="room w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
                         <p class="position">conference</p>
                         <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
-                         <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
+                            <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-xs">hggfdsdfg</p>
@@ -47,16 +48,18 @@
                             </div>
                             <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center text-white"><span>x</span></button>
                         </div>  -->
-                        
-                         
+
+
                         </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('conference')">+</button>
+                        <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                            onclick="addworkerroom('conference')">+</button>
                     </div>
-                    
-                    <div id="reception-room" class="room w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
-                         <p class="position">reception</p>
+
+                    <div id="reception-room"
+                        class="room w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
+                        <p class="position">reception</p>
                         <div class="w-full flex justify-center items-center gap-1" id="reception-room-worker">
-                        <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
+                            <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-xs">hggfdsdfg</p>
@@ -64,45 +67,54 @@
                             </div>
                             <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center text-white"><span>x</span></button>
                         </div> -->
-                       
-                         
+
+
                         </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('reception')">+</button>
+                        <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                            onclick="addworkerroom('reception')">+</button>
                     </div>
                 </div>
 
                 <div class="h-full w-[45.6%] flex flex-col justify-between">
                     <div class="w-full h-[36%] flex">
-                        <div id="servers-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
-                             <p class="position">servers</p>
-                             <div class="w-full flex justify-center items-center gap-1" id="servers-room-worker">
-                      
-                         
+                        <div id="servers-room"
+                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                            <p class="position">servers</p>
+                            <div class="w-full flex justify-center items-center gap-1" id="servers-room-worker">
+
+
+                            </div>
+                            <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                                onclick="addworkerroom('servers')">+</button>
                         </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('servers')">+</button>
-                        </div>
-                        <div id="security-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
-                             <p class="position">security</p>
-                              <div class="w-full flex justify-center items-center gap-1" id="security-room-worker">
-                    
-                        </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('security')">+</button>
+                        <div id="security-room"
+                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                            <p class="position">security</p>
+                            <div class="w-full flex justify-center items-center gap-1" id="security-room-worker">
+
+                            </div>
+                            <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                                onclick="addworkerroom('security')">+</button>
                         </div>
                     </div>
                     <div class="w-full h-[33%] flex">
-                        <div id="staff-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
-                             <p class="position">staff</p>
-                             <div class="w-full flex justify-center items-center gap-1" id="staff-room-worker">
-                    
+                        <div id="staff-room"
+                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                            <p class="position">staff</p>
+                            <div class="w-full flex justify-center items-center gap-1" id="staff-room-worker">
+
+                            </div>
+                            <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                                onclick="addworkerroom('staff')">+</button>
                         </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600" onclick="addworkerroom('staff')">+</button>
-                        </div>
-                        <div id="vault-room" class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
-                             <p class="position">vault</p>
+                        <div id="vault-room"
+                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                            <p class="position">vault</p>
                             <div class="w-full flex justify-center items-center gap-1" id="vault-room-worker">
-                    
-                        </div>
-                         <button class="text-white w-8 h-8 rounded-md bg-blue-600"  onclick="addworkerroom('vault')">+</button>
+
+                            </div>
+                            <button class="text-white w-8 h-8 rounded-md bg-blue-600"
+                                onclick="addworkerroom('vault')">+</button>
                         </div>
                     </div>
                 </div>
@@ -113,26 +125,27 @@
         <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
         <div class="modal__content w-[30%] rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
             <header class="modal__header flex justify-between">
-                <h3 class="modal__title text-2xl text-blue-500" id="modal-title">Add worker</h3>
+                <h3 class="colortext modal__title text-3xl " id="form-title">Add worker</h3>
                 <button class="modal__close" data-action="close-modal">&times;</button>
             </header>
             <div class="modal__body h-[95%] " id="modal-body">
                 <form class="form flex flex-col justify-between h-full p-1 mb-4" id="worker-form">
                     <div class="forminput flex flex-col">
-                        
+
                         <div class="form__group flex flex-col  gap-1">
                             <label class="form__label text-sm font-mono" for="worker-name">Name:</label>
-                            
+
                             <input type="text" id="worker-name"
                                 class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 "
                                 placeholder="Enter worker name">
-                                <div class="errors text-xs" id="name-errors"></div>
+                            <div class="errors text-xs" id="name-errors"></div>
 
                         </div>
                         <div class="form__group flex flex-col  gap-1">
                             <label class="form__label text-sm" for="worker-role">Role:</label>
                             <select
-                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 text-sm" id="worker-role">
+                                class="border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500 text-sm"
+                                id="worker-role">
                                 <option value="security" class="">security</option>
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="IT Guy">IT Guy</option>
@@ -140,25 +153,25 @@
                                 <option value="Manager">Manager</option>
                                 <option value="Other">Other</option>
                             </select>
-                             <div class="errors text-xs" id="role-errors"></div>
+                            <div class="errors text-xs" id="role-errors"></div>
 
                         </div>
-           
+
 
                         <div class="form__group flex flex-col  gap-2">
                             <label class="form__label text-sm" for="worker-image">Image URL</label>
                             <input type="url" id="worker-image"
                                 class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
                                 placeholder="https://example.com/image.jpg">
-                                 <div class="errors text-xs" id="image-errors"></div>
+                            <div class="errors text-xs" id="image-errors"></div>
                             <div id="show-image"></div>
                         </div>
 
                         <!-- add exprience -->
                         <div class="flex flex-col  gap-4">
                             <p class="text-sm">Exepirience:</p>
-                                <div class="cntinaireExpireince flex flex-col  gap-4">
-                            <!-- <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
+                            <div class="cntinaireExpireince flex flex-col  gap-4">
+                                <!-- <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
                                     <label class="form__label text-sm" for="worker-name">Company:</label>
                                     <input type="text" id="company"
@@ -186,7 +199,7 @@
                                 </div>
 
                             </div> -->
-                             </div>
+                            </div>
                             <button type="button" class="addExperience bg-green-500 w-33 h-9 rounded-md text-white">add
                                 Experience</button>
 
@@ -196,21 +209,22 @@
                             <label class="form__label text-sm" for="event-seats">Email:</label>
                             <input type="email" id="worker-email"
                                 class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
-                                placeholder="exemple@gmail.com" >
-                                 <div class="errors text-xs" id="email-errors"></div>
+                                placeholder="exemple@gmail.com">
+                            <div class="errors text-xs" id="email-errors"></div>
                         </div>
 
                         <div class="form__group flex flex-col gap-1">
                             <label class="form__label text-sm" for="event-price">Phone:</label>
                             <input type="tel" id="worker-tel"
                                 class="input border border-gray-300 p-1 rounded-sm outline-none focus:border-blue-500"
-                                placeholder="0645432312" >
-                                 <div class="errors text-xs" id="tele-errors"></div>
+                                placeholder="0645432312">
+                            <div class="errors text-xs" id="tele-errors"></div>
                         </div>
                     </div>
                     <div id="errur"></div>
                     <div class="form__actions flex gap-3 h-10">
-                        <button type="submit" class="btn bg-blue-700 w-[35%] h-10 rounded-md text-white" id="saveworker">Save worker</button>
+                        <button type="submit" class="btn bg-blue-700 w-[35%] h-10 rounded-md text-white"
+                            id="saveworker">Save worker</button>
                         <button type="reset" class="btn bg-gray-400 w-[35%] h-10 rounded-md text-white">Cancel</button>
                     </div>
 
@@ -218,18 +232,42 @@
 
             </div>
         </div>
-    </div> 
-     <div class="fixed top-0 left-0 justify-center items-center z-100 w-full h-full p-2" id="assingmodal">
+    </div>
+    <div class="fixed top-0 left-0 justify-center items-center z-100 w-full h-full p-2" id="assingmodal">
         <div class="modal__overlay absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <div class="modal__content w-[30%]  rounded-md overflow-auto p-5 pt-4 bg-white z-200 flex flex-col  gap-4">
+        <div
+            class="modal__content w-[30%]  rounded-md overflow-auto h-[97%] p-5 pt-5 bg-white z-200 flex flex-col  gap-4">
             <header class="modal__header flex justify-between">
-                <h3 class="modal__title text-2xl text-blue-500" id="modal-title">Select Worker to Assing</h3>
+                <h3 class="colortext modal__title text-2xl text-blue-500" id="modal-title">Select Worker to Assing</h3>
             </header>
-            <div class="modal__body h-[95%] flex flex-col gap-2" id="modal-woker">
+            <div class="modal__body flex flex-col gap-2" id="modal-woker">
+                 <!-- <div class="flex flex-col gap-3">
+                    <div class=" p-3"><img src="https://avatar.iran.liara.run/public" alt="" width="200" height="200"
+                            class="rounded-full border">
+                    </div>
+                    <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
+                        <p class="fontsans">Name:<span></span></p>
+                        <p class="fontsans">Role:</p>
+                        <p class="fontsans">Email:</p>
+                        <p class="fontsans">Telephone:</p>
+
+                    </div>
+                    <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
+                        <h3 class="Experience">Experience:1</h3>
+                        <p class="">Company:<span></span></p>
+                        <p class="">Role:</p>
+                        <p class="">From:</p>
+                        <p class="">To:</p>
+                    </div> 
+                   
+
+
+                </div>  -->
             </div>
-                <button type="submit" class="btn bg-amber-700 w-full h-10 rounded-md text-white" id="closeassing">Close</button>
+               <button type="submit" class="btn bg-amber-700 w-full rounded-md text-white"
+                    id="closeassing">Close</button>
         </div>
-    </div> 
+    </div>
     <script src="script.js"></script>
 </body>
 

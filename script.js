@@ -60,15 +60,18 @@ btnsaveworker.addEventListener('click', (e) => {
         }
     }
 })
-const modaltitle = document.querySelector('#modal-title');
+const formltitle = document.querySelector('#form-title');
+const modaltitle =document.querySelector('#modal-title');
 document.querySelector('.modal__close').addEventListener('click', () => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
     document.getElementById('worker-form').reset();
     btnsaveworker.style = "none";
     btnsaveworker.textContent = "Save worker";
-    modaltitle.textContent = "Add worker";
+    formltitle.textContent = "Add worker";
+     formltitle.style="none";
     document.querySelector('.cntinaireExpireince').innerHTML = '';
+     modaltitle.textContent="Select Worker to Assing";
 })
 //validationworker function
 function validationworker(e) {
@@ -292,6 +295,7 @@ function showworker(workerna) {
                         </div>
     `
     })
+     handprofileActionClick();
 }
 
 
@@ -424,30 +428,36 @@ function assingworker(choix,id) {
 //show_assig_inroom function
 function show_assig_inroom(workeras, assingin) {
     assingin.innerHTML += `
-            <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
-                <img src="" alt="${workeras[0].image}" class="profil-image rounded-3xl" width="30" height="30">
+            <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
+             border-gray-200 w-[40%]" data-btn="details" data-id="${workeras[0].id}">
+                <img src="${workeras[0].image}" alt="" class="profil-image rounded-3xl" width="30" height="30">
                 <div class="flex flex-col justify-center">
                      <p class="name text-xs">${workeras[0].name}</p>
                     <p class="role text-xs">${workeras[0].role}</p>
                 </div>
-                <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center text-white"><span>x</span></button>
+                <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center
+                 text-white"><span>x</span></button>
             </div> 
 
       `
+      handprofileActionClick();
 }
 
 //handprofileActionClick function
 function handprofileActionClick(){
 const profil = document.querySelectorAll('.profil');
+ 
 profil.forEach(pro=>{
+    
     pro.addEventListener('click', (e) =>{
+            console.log("hhhhhh");
         if( e.target.dataset.btn=="edit"){
         
             
          const  workerid = e.target.dataset.id;
          editWorker(workerid);
     }else{
-         const  workerid = e.target.dataset.id;
+         const  workerid = e.currentTarget.dataset.id;
           detailWorker(workerid);
         }
        
@@ -477,6 +487,7 @@ function editWorker(wid) {
     form.querySelector('#worker-tel').value = workersna[index].telephone;
 
     if (workersna[index].expirience) {
+        
         cntinaireExpireince.innerHTML = '';
         workersna[index].expirience.forEach((work) => {
 
@@ -526,7 +537,8 @@ function editWorker(wid) {
     const btnedit = document.querySelector('#saveworker');
     btnedit.textContent = "Edit";
     btnedit.style.backgroundColor = "orange";
-    modaltitle.textContent = "Edit worker";
+    formltitle.textContent = "Edit worker";
+    formltitle.style.color="orange";
     btnedit.addEventListener('click', (e) => {
 
         if (btnedit.textContent == "Edit") {
@@ -535,7 +547,8 @@ function editWorker(wid) {
             workersna[index] = worker;
 
             btnedit.textContent = "Save worker";
-            modaltitle.textContent = "Add worker";
+            formltitle.textContent = "Add worker";
+            formltitle.style="none";
             modal.style.display = 'none';
             btnedit.style = "none";
             saveData();
@@ -544,4 +557,53 @@ function editWorker(wid) {
 
     })
 
+}
+//detailsWorker function
+function detailWorker(wid){
+     workers.forEach(work => {
+        if (work.id == wid) {
+            index = workers.indexOf(work);
+
+        }
+    })
+   const modalwoker =document.querySelector('#modal-woker');
+   
+   modaltitle.textContent="Profile";
+    document.getElementById('assingmodal').style.display = 'flex';
+    modalwoker.innerHTML='';
+    modalwoker.innerHTML=`
+     <div class="flex flex-col gap-3">
+                    <div class=" p-3"><img src="${workers[index].image}" alt="" width="200" height="200"
+                            class="rounded-full border">
+                    </div>
+                    <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
+                     <h3 class="Experience rounded-sm bg-gray-400">Information personnel</h3>
+                        <p ><span class="fontsans">Name:</span>${workers[index].name}</p>
+                        <p ><span class="fontsans">Role:</span>${workers[index].role}</p>
+                        <p ><span class="fontsans">Email:</span>${workers[index].email}</p>
+                        <p ><span class="fontsans">Telephone:</span>${workers[index].telephone}</p>
+
+                    </div>
+                   
+                </div>
+    `
+
+    if(workers[index].expirience){
+       
+        let c=1;
+       workers[index].expirience.forEach(expirien =>{
+       
+        
+        modalwoker.children[0].innerHTML+=`
+          <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
+                        <h3 class="Experience rounded-sm bg-gray-400">Experience:${c++}</h3>
+                        <p><span class="fontsans">Company:</span>${expirien.company}</p>
+                        <p><span class="fontsans">Role:</span>${expirien.role}</p>
+                        <p ><span class="fontsans">From:</span>${expirien.datefrom}</p>
+                        <p ><span class="fontsans">To:</span>${expirien.dateTo}</p>
+                    </div>
+        `
+       }) 
+    }
+   
 }
