@@ -1,6 +1,6 @@
 let workers = [], workersna = [];
 
-let counteur ;
+let counteur;
 
 // Save/load from localStorage
 function loadData() {
@@ -22,7 +22,8 @@ function saveData() {
 function init() {
     loadData();
     showworker(workersna);
-   
+    handprofileActionClick();
+
     let maxid = 0;
     workers.forEach(et => {
         if (et.id > maxid) {
@@ -32,32 +33,42 @@ function init() {
     counteur = maxid + 1;
 }
 document.addEventListener('DOMContentLoaded', init);
+
+
 function addworker() {
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
 
 }
+const btnsaveworker = document.querySelector('#saveworker');
 document.querySelector('#add-new-worker').addEventListener('click', addworker)
-const btnsaveworker =document.querySelector('#saveworker');
 btnsaveworker.addEventListener('click', (e) => {
-if(btnsaveworker.textContent == "Save worker"){
-    const worker = validationworker(e)
-    if (worker) {
-        
-        
-        workers.push(worker);
-        workersna.push(worker);
-        saveData();
-        
-        showworker(workersna);
-        const modal = document.querySelector('.modal');
-        modal.style.display = 'none';
+    if (btnsaveworker.textContent == "Save worker") {
+        const worker = validationworker(e)
+        if (worker) {
+
+
+            workers.push(worker);
+            workersna.push(worker);
+            saveData();
+
+            showworker(workersna);
+            handprofileActionClick();
+
+            const modal = document.querySelector('.modal');
+            modal.style.display = 'none';
+        }
     }
-}
 })
+const modaltitle = document.querySelector('#modal-title');
 document.querySelector('.modal__close').addEventListener('click', () => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
+    document.getElementById('worker-form').reset();
+    btnsaveworker.style = "none";
+    btnsaveworker.textContent = "Save worker";
+    modaltitle.textContent = "Add worker";
+    document.querySelector('.cntinaireExpireince').innerHTML = '';
 })
 //validationworker function
 function validationworker(e) {
@@ -192,7 +203,7 @@ function validationworker(e) {
     }
     document.getElementById('worker-form').reset();
     return worker;
-   
+
 }
 //remove errur message
 function removeErrurmessage() {
@@ -209,7 +220,7 @@ removeErrurmessage();
 //add experience  function
 function addexperience() {
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
-    cntinaireExpireince.insertAdjacentHTML('beforeend',`
+    cntinaireExpireince.insertAdjacentHTML('beforeend', `
     
      <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
@@ -244,8 +255,8 @@ function addexperience() {
                                 </div>
 
                             </div>`)
-                            
-    
+
+
     removeErrurmessage();
 }
 document.querySelector('.addExperience').addEventListener('click', addexperience)
@@ -269,16 +280,16 @@ function showworker(workerna) {
     const staf = document.getElementById('staf');
     staf.innerHTML = '';
 
-    workerna.forEach(work =>{
+    workerna.forEach(work => {
         staf.innerHTML += `
-     <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200">
+     <div class="profil flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" data-btn="detaile" data-id="${work.id}">
                             <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-sm">${work.name}</p>
                                 <p class="role text-xs">${work.role}</p>
                             </div>
-                            <button class="btnedit m-auto text-amber-500" data-id="${work.id}">Edit</button>
-                        </div> 
+                            <button class="btnedit m-auto text-amber-500" data-btn="edit" data-id="${work.id}">Edit</button>
+                        </div>
     `
     })
 }
@@ -290,31 +301,31 @@ function addworkerroom(room) {
     const choix = room;
     switch (choix) {
         case "conference":
-           showWorkerinmodal(workersna,choix);
+            showWorkerinmodal(workersna, choix);
             break;
         case "reception":
-            const workerreception=workersna.filter(work =>work.role=="Receptionist" || work.role=="Cleaning" || work.role=="Manager")
-    
-           showWorkerinmodal(workerreception,choix);
+            const workerreception = workersna.filter(work => work.role == "Receptionist" || work.role == "Cleaning" || work.role == "Manager")
+
+            showWorkerinmodal(workerreception, choix);
             break;
-            case "servers":
-            const workerservers=workersna.filter(work =>work.role=="IT Guy" || work.role=="Cleaning" || work.role=="Manager")
-            
-           showWorkerinmodal(workerservers,choix);
+        case "servers":
+            const workerservers = workersna.filter(work => work.role == "IT Guy" || work.role == "Cleaning" || work.role == "Manager")
+
+            showWorkerinmodal(workerservers, choix);
             break;
-            case "security":
-            const workersecurity=workersna.filter(work =>work.role=="security" || work.role=="Cleaning" || work.role=="Manager")
-            
-           showWorkerinmodal(workersecurity,choix);
+        case "security":
+            const workersecurity = workersna.filter(work => work.role == "security" || work.role == "Cleaning" || work.role == "Manager")
+
+            showWorkerinmodal(workersecurity, choix);
             break;
-            case "staff":
-       
-            
-           showWorkerinmodal(workersna,choix);
+        case "staff":
+
+
+            showWorkerinmodal(workersna, choix);
             break;
-            case "vault":
-            const workervault=workersna.filter(work =>work.role!="Cleaning")
-           showWorkerinmodal(workervault,choix);
+        case "vault":
+            const workervault = workersna.filter(work => work.role != "Cleaning")
+            showWorkerinmodal(workervault, choix);
             break;
 
 
@@ -323,14 +334,15 @@ function addworkerroom(room) {
 
 }
 //showWorkerinmodal function
-function showWorkerinmodal(ws,choix){
-    const modelworker = document.getElementById('modal-woker');
+function showWorkerinmodal(ws, choix) {
     console.log(ws);
-     modelworker.innerHTML = '';
     
-     ws.forEach(work => {
-        
-                modelworker.innerHTML += `
+    const modelworker = document.getElementById('modal-woker');
+    modelworker.innerHTML = '';
+
+    ws.forEach(work => {
+
+        modelworker.innerHTML += `
      <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" 
               data-id="${work.id}" data-room="${choix}" onclick='assingworker(this.dataset.room,this.dataset.id)'>
             <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
@@ -341,76 +353,77 @@ function showWorkerinmodal(ws,choix){
                            
     </div> 
     `
-    
-})}
+
+    })
+}
 
 document.getElementById('closeassing').addEventListener('click', () => {
     document.getElementById('assingmodal').style.display = 'none';
 })
 
 //assingworker function
-function assingworker(choix, id) {
+function assingworker(choix,id) {
     console.log(workersna);
-    
+
     const workeras = workersna.filter(work => work.id == Number(id));
-    
+
     const index = workersna.indexOf(workeras[0]);
 
 
     switch (choix) {
         case "conference":
-             const conferenceroom = document.getElementById('conference-room-worker');
-           show_assig_inroom(workeras,conferenceroom);
-         workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
-    
+            const conferenceroom = document.getElementById('conference-room-worker');
+            show_assig_inroom(workeras, conferenceroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
+
         case "reception":
-            
+
             const receptionroom = document.getElementById('reception-room-worker');
-           show_assig_inroom(workeras,receptionroom);
-       workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
-         case "servers":
-            
+            show_assig_inroom(workeras, receptionroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
+        case "servers":
+
             const serversroom = document.getElementById('servers-room-worker');
-           show_assig_inroom(workeras,serversroom);
-       workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
-         case "security":
-            
+            show_assig_inroom(workeras, serversroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
+        case "security":
+
             const securityroom = document.getElementById('security-room-worker');
-            show_assig_inroom(workeras,securityroom);
-       workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
+            show_assig_inroom(workeras, securityroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
         case "staff":
-            
+
             const staffroom = document.getElementById('staff-room-worker');
-            show_assig_inroom(workeras,staffroom);
-       workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
+            show_assig_inroom(workeras, staffroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
         case "vault":
-            
+
             const vaultroom = document.getElementById('vault-room-worker');
-            show_assig_inroom(workeras,vaultroom);
-       workersna.splice(index, 1);
-        showworker(workersna);
-        document.getElementById('assingmodal').style.display = 'none';
-           break;
+            show_assig_inroom(workeras, vaultroom);
+            workersna.splice(index, 1);
+            showworker(workersna);
+            document.getElementById('assingmodal').style.display = 'none';
+            break;
     }
 }
 //show_assig_inroom function
-function show_assig_inroom(workeras,assingin){
- assingin.innerHTML += `
+function show_assig_inroom(workeras, assingin) {
+    assingin.innerHTML += `
             <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                 <img src="" alt="${workeras[0].image}" class="profil-image rounded-3xl" width="30" height="30">
                 <div class="flex flex-col justify-center">
@@ -423,38 +436,51 @@ function show_assig_inroom(workeras,assingin){
       `
 }
 
-const staf=document.querySelector('#staf');
-console.log(staf);
-// btnedit.forEach(btn=>{
+//handprofileActionClick function
+function handprofileActionClick(){
+const profil = document.querySelectorAll('.profil');
+profil.forEach(pro=>{
+    pro.addEventListener('click', (e) =>{
+        if( e.target.dataset.btn=="edit"){
+        
+            
+         const  workerid = e.target.dataset.id;
+         editWorker(workerid);
+    }else{
+         const  workerid = e.target.dataset.id;
+          detailWorker(workerid);
+        }
+       
+         
     
-    
-    staf.addEventListener('click',(e)=>{
-       workerid=e.target.dataset.id;
-       editEvent(workerid);
     })
-// })
+})
+}
+//editEvent function
 
-function editEvent(workerid) {
-
+function editWorker(wid) {
+ 
     workersna.forEach(work => {
-        if (work.id == workerid) {
+        if (work.id == wid) {
             index = workersna.indexOf(work);
 
         }
     })
     const form = document.querySelector('#worker-form');
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
+   
+    
     form.querySelector('#worker-name').value = workersna[index].name;
     form.querySelector('#worker-role').value = workersna[index].role;
     form.querySelector('#worker-image').value = workersna[index].image;
     form.querySelector('#worker-email').value = workersna[index].email;
     form.querySelector('#worker-tel').value = workersna[index].telephone;
-    
+
     if (workersna[index].expirience) {
         cntinaireExpireince.innerHTML = '';
         workersna[index].expirience.forEach((work) => {
 
-            cntinaireExpireince.insertAdjacentHTML('beforeend',`
+            cntinaireExpireince.insertAdjacentHTML('beforeend', `
     <div class="Expireince bg-gray-100  p-5 rounded-sm shadow-md">
                                 <div class="form__group flex flex-col gap-1 ">
                                      <div class="flex flex-col gap-1">
@@ -491,28 +517,29 @@ function editEvent(workerid) {
 `)
 
         })
-        
+
     }
 
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
-    const btnedit =document.querySelector('#saveworker');
-    const modaltitle =document.querySelector('#modal-title');
 
+    const btnedit = document.querySelector('#saveworker');
     btnedit.textContent = "Edit";
-    modaltitle.textContent="Edit worker";
+    btnedit.style.backgroundColor = "orange";
+    modaltitle.textContent = "Edit worker";
     btnedit.addEventListener('click', (e) => {
 
         if (btnedit.textContent == "Edit") {
-         let    worker=validationworker(e);
-           worker.id = workersna[index].id;
-           workersna[index] = worker;
+            let worker = validationworker(e);
+            worker.id = workersna[index].id;
+            workersna[index] = worker;
 
-        btnedit.textContent = "Save worker";
-        modaltitle.textContent="Add worker";
-         modal.style.display = 'none';
-         saveData();
-         showworker(workersna);
+            btnedit.textContent = "Save worker";
+            modaltitle.textContent = "Add worker";
+            modal.style.display = 'none';
+            btnedit.style = "none";
+            saveData();
+            showworker(workersna);
         }
 
     })
