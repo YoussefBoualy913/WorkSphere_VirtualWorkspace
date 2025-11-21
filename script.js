@@ -1,8 +1,10 @@
 let workers = [], workersna = [];
-
 let counteur;
 
+// ==============================
 // Save/load from localStorage
+// ==============================
+
 function loadData() {
 
     if (JSON.parse(localStorage.getItem('workers'))) {
@@ -18,10 +20,14 @@ function saveData() {
     localStorage.setItem('workers', JSON.stringify(workers))
     localStorage.setItem('workersna', JSON.stringify(workersna))
 }
+
+// ================
 // INITIALIZATION
+// ================
+
 function init() {
     loadData();
-    workersna=structuredClone(workers);
+    workersna = structuredClone(workers);
     showworker(workersna);
     handprofileActionClick();
 
@@ -32,18 +38,25 @@ function init() {
         }
     })
     counteur = maxid + 1;
-     workers.forEach( work=> {
-        work.room=null;
+    workers.forEach(work => {
+        work.room = null;
     })
 }
 document.addEventListener('DOMContentLoaded', init);
 
+// ===============
+// addworker
+// ===============
 
 function addworker() {
     const modal = document.querySelector('.modal');
     modal.style.display = 'flex';
 
 }
+// ===================
+//save worker
+// ===================
+
 const btnsaveworker = document.querySelector('#saveworker');
 document.querySelector('#add-new-worker').addEventListener('click', addworker)
 btnsaveworker.addEventListener('click', (e) => {
@@ -57,7 +70,7 @@ btnsaveworker.addEventListener('click', (e) => {
             saveData();
 
             showworker(workersna);
-             handprofileActionClick();
+            handprofileActionClick();
 
             const modal = document.querySelector('.modal');
             modal.style.display = 'none';
@@ -65,7 +78,7 @@ btnsaveworker.addEventListener('click', (e) => {
     }
 })
 const formltitle = document.querySelector('#form-title');
-const modaltitle =document.querySelector('#modal-title');
+const modaltitle = document.querySelector('#modal-title');
 document.querySelector('.modal__close').addEventListener('click', () => {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
@@ -73,11 +86,15 @@ document.querySelector('.modal__close').addEventListener('click', () => {
     btnsaveworker.style = "none";
     btnsaveworker.textContent = "Save worker";
     formltitle.textContent = "Add worker";
-     formltitle.style="none";
+    formltitle.style = "none";
     document.querySelector('.cntinaireExpireince').innerHTML = '';
-     modaltitle.textContent="Select Worker to Assing";
+    modaltitle.textContent = "Select Worker to Assing";
 })
+
+// =========================
 //validationworker function
+// =========================
+
 function validationworker(e) {
     e.preventDefault();
     const workername = document.querySelector('#worker-name');
@@ -206,14 +223,16 @@ function validationworker(e) {
         email: workeremail.value,
         telephone: workertele.value,
         expirience: expiriences,
-        room:null
+        room: null
 
     }
     document.getElementById('worker-form').reset();
     return worker;
 
 }
+//====================
 //remove errur message
+// ===================
 function removeErrurmessage() {
     const input = document.querySelectorAll('.input');
     input.forEach(inp => {
@@ -225,7 +244,11 @@ function removeErrurmessage() {
     })
 }
 removeErrurmessage();
+
+// ========================
 //add experience  function
+// ========================
+
 function addexperience() {
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
     cntinaireExpireince.insertAdjacentHTML('beforeend', `
@@ -269,7 +292,10 @@ function addexperience() {
 }
 document.querySelector('.addExperience').addEventListener('click', addexperience)
 
+// =================
 //showimage in form
+// ==================
+
 const workerimage = document.getElementById('worker-image')
 workerimage.addEventListener('input', () => {
     if (workerimage.value) {
@@ -282,7 +308,10 @@ workerimage.addEventListener('input', () => {
     }
 })
 
+// ===================
 //showworker function
+// ===================
+
 function showworker(workerna) {
 
     const staf = document.getElementById('staf');
@@ -300,13 +329,15 @@ function showworker(workerna) {
                         </div>
     `
     })
-    
-    
+
+
 }
 
 
-
+// =====================
 //addworkerroom function
+// =====================
+
 function addworkerroom(room) {
     const choix = room;
     switch (choix) {
@@ -343,17 +374,21 @@ function addworkerroom(room) {
     document.getElementById('assingmodal').style.display = 'flex';
 
 }
+
+// =========================
 //showWorkerinmodal function
+// =========================
+
 function showWorkerinmodal(ws, choix) {
     console.log(ws);
-    
+
     const modelworker = document.getElementById('modal-woker');
     modelworker.innerHTML = '';
 
     ws.forEach(work => {
 
         modelworker.innerHTML += `
-     <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" 
+     <div class=" flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" 
               data-id="${work.id}" data-room="${choix}" onclick='assingworker(this.dataset.room,this.dataset.id)'>
             <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
             <div class="flex flex-col justify-center">
@@ -371,9 +406,12 @@ document.getElementById('closeassing').addEventListener('click', () => {
     document.getElementById('assingmodal').style.display = 'none';
 })
 
+// =====================
 //assingworker function
-function assingworker(choix,id) {
-   
+// =======================
+
+function assingworker(choix, id) {
+
 
     const workeras = workersna.filter(work => work.id == Number(id));
 
@@ -383,18 +421,18 @@ function assingworker(choix,id) {
     switch (choix) {
         case "conference":
             const conferenceroom = document.getElementById('conference-room-worker');
-            let nobreroomconf=0;
-            workers.forEach(work=>{
-                if(work.room=="conference"){
-                   nobreroomconf++;
+            let nobreroomconf = 0;
+            workers.forEach(work => {
+                if (work.room == "conference") {
+                    nobreroomconf++;
                 }
             })
-            if(nobreroomconf<=3){
-            show_assig_inroom(workeras, conferenceroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+            if (nobreroomconf <= 3) {
+                show_assig_inroom(workeras, conferenceroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 4 workers");
             }
             break;
@@ -402,115 +440,119 @@ function assingworker(choix,id) {
         case "reception":
 
             const receptionroom = document.getElementById('reception-room-worker');
-             let nobreroomrec=0;
-            workers.forEach(work=>{
-                if(work.room=="reception"){
-                   nobreroomrec++;
+            let nobreroomrec = 0;
+            workers.forEach(work => {
+                if (work.room == "reception") {
+                    nobreroomrec++;
                 }
             })
-            if(nobreroomrec<=2){
-             show_assig_inroom(workeras, receptionroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+            if (nobreroomrec <= 2) {
+                show_assig_inroom(workeras, receptionroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
-           
+
             break;
         case "servers":
             console.log(workers);
-            
+
             const serversroom = document.getElementById('servers-room-worker');
-             let nobreroomserv=0;
-            workers.forEach(work=>{
-                if(work.room=="servers"){
-                   nobreroomserv++;
+            let nobreroomserv = 0;
+            workers.forEach(work => {
+                if (work.room == "servers") {
+                    nobreroomserv++;
                 }
             })
             console.log(nobreroomserv);
-            
-            if(nobreroomserv<=2){
-            show_assig_inroom(workeras, serversroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+
+            if (nobreroomserv <= 2) {
+                show_assig_inroom(workeras, serversroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
-           
+
             break;
         case "security":
 
             const securityroom = document.getElementById('security-room-worker');
-             let nobreroomsecu=0;
-            workers.forEach(work=>{
-                if(work.room=="security"){
-                   nobreroomsecu++;
+            let nobreroomsecu = 0;
+            workers.forEach(work => {
+                if (work.room == "security") {
+                    nobreroomsecu++;
                 }
             })
-            if(nobreroomsecu<=2){
-           show_assig_inroom(workeras, securityroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+            if (nobreroomsecu <= 2) {
+                show_assig_inroom(workeras, securityroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
-            
+
             break;
         case "staff":
 
             const staffroom = document.getElementById('staff-room-worker');
-             let nobreroomstaf=0;
-            workers.forEach(work=>{
-                if(work.room=="staff"){
-                   nobreroomstaf++;
+            let nobreroomstaf = 0;
+            workers.forEach(work => {
+                if (work.room == "staff") {
+                    nobreroomstaf++;
                 }
             })
-            if(nobreroomstaf<=2){
-           show_assig_inroom(workeras, staffroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+            if (nobreroomstaf <= 2) {
+                show_assig_inroom(workeras, staffroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
-            
-           
+
+
             break;
         case "vault":
 
             const vaultroom = document.getElementById('vault-room-worker');
-             let nobreroomvaul=0;
-            workers.forEach(work=>{
-                if(work.room=="vault"){
-                   nobreroomvaul++;
+            let nobreroomvaul = 0;
+            workers.forEach(work => {
+                if (work.room == "vault") {
+                    nobreroomvaul++;
                 }
             })
-            if(nobreroomvaul<=2){
-            show_assig_inroom(workeras, vaultroom,choix);
-            workersna.splice(index, 1);
-            showworker(workersna);
-            document.getElementById('assingmodal').style.display = 'none';
-            }else{
+            if (nobreroomvaul <= 2) {
+                show_assig_inroom(workeras, vaultroom, choix);
+                workersna.splice(index, 1);
+                showworker(workersna);
+                document.getElementById('assingmodal').style.display = 'none';
+            } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
-            
+
             break;
     }
 }
+
+// ==========================
 //show_assig_inroom function
-function show_assig_inroom(workeras, assingin,room) {
-    
-    if(workeras){
-    workeras[0].room=room;
-    workers.forEach(work=>{
-        if(workeras[0].id==work.id){
-            work.room=workeras[0].room;
-        }
-    })
-    assingin.innerHTML += `
+// ===========================
+
+function show_assig_inroom(workeras, assingin, room) {
+
+    if (workeras) {
+        workeras[0].room = room;
+        workers.forEach(work => {
+            if (workeras[0].id == work.id) {
+                work.room = workeras[0].room;
+            }
+        })
+        assingin.innerHTML += `
             <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
              border-gray-200 w-[40%]" data-btn="details" data-id="${workeras[0].id}">
                 <img src="${workeras[0].image}" alt="" class="profil-image rounded-3xl" width="30" height="30">
@@ -523,49 +565,53 @@ function show_assig_inroom(workeras, assingin,room) {
             </div> 
 
       `
-      handprofileActionClick();
-}
-      
-}
+      assingin.parentElement.classList.remove("room");
+        handprofileActionClick();
+    }
 
+}
+// ===============================
 //handprofileActionClick function
-function handprofileActionClick(){
-const profil = document.querySelectorAll('.profil');
- 
-profil.forEach(pro =>{
+// ===============================
+function handprofileActionClick() {
+    const profil = document.querySelectorAll('.profil');
 
-    pro.addEventListener('click',(e) =>{
+    profil.forEach(pro => {
+
+        pro.addEventListener('click', (e) => {
             console.log("hilkjhgoooo2");
-           
-        if( e.target.dataset.btn==="edit"){
-       
-            
-         const  workerid = e.target.dataset.id;
-         editWorker(workerid);
-       }else if( e.target.dataset.btn==="dellet"){
-        
-            const  workerid = e.target.dataset.id;
-            
-            const assingine= e.target.parentElement.parentElement.parentElement;
-            e.target.parentElement.parentElement.remove();
-            
-         delettsWorker(workerid,assingine);
-       }
-       else{
-        
-         const  workerid = e.currentTarget.dataset.id;
-          detailWorker(workerid);
-        }
-       
-         
-    
+
+            if (e.target.dataset.btn === "edit") {
+
+
+                const workerid = e.target.dataset.id;
+                editWorker(workerid);
+            } else if (e.target.dataset.btn === "dellet") {
+
+                const workerid = e.target.dataset.id;
+
+                const assingine = e.target.parentElement.parentElement.parentElement;
+                e.target.parentElement.parentElement.remove();
+
+                delettsWorker(workerid, assingine);
+            }
+            else {
+
+                const workerid = e.currentTarget.dataset.id;
+                detailWorker(workerid);
+            }
+
+
+
+        })
     })
-})
 }
-//editEvent function
+//=======================
+// editWorker function
+//=======================
 
 function editWorker(wid) {
- 
+
     workersna.forEach(work => {
         if (work.id == wid) {
             index = workersna.indexOf(work);
@@ -574,8 +620,8 @@ function editWorker(wid) {
     })
     const form = document.querySelector('#worker-form');
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
-   
-    
+
+
     form.querySelector('#worker-name').value = workersna[index].name;
     form.querySelector('#worker-role').value = workersna[index].role;
     form.querySelector('#worker-image').value = workersna[index].image;
@@ -583,7 +629,7 @@ function editWorker(wid) {
     form.querySelector('#worker-tel').value = workersna[index].telephone;
 
     if (workersna[index].expirience) {
-        
+
         cntinaireExpireince.innerHTML = '';
         workersna[index].expirience.forEach((work) => {
 
@@ -634,42 +680,45 @@ function editWorker(wid) {
     btnedit.textContent = "Edit";
     btnedit.style.backgroundColor = "orange";
     formltitle.textContent = "Edit worker";
-    formltitle.style.color="orange";
+    formltitle.style.color = "orange";
     btnedit.addEventListener('click', (e) => {
 
         if (btnedit.textContent == "Edit") {
             let worker = validationworker(e);
             worker.id = workersna[index].id;
             workersna[index] = worker;
-             workers[index] = worker;
+            workers[index] = worker;
 
             btnedit.textContent = "Save worker";
             formltitle.textContent = "Add worker";
-            formltitle.style="none";
+            formltitle.style = "none";
             modal.style.display = 'none';
             btnedit.style = "none";
             saveData();
             showworker(workersna);
-             handprofileActionClick(); 
+            handprofileActionClick();
         }
 
     })
 
 }
+// =======================
 //detailsWorker function
-function detailWorker(wid){
-     workers.forEach(work => {
+// =======================
+
+function detailWorker(wid) {
+    workers.forEach(work => {
         if (work.id == wid) {
             index = workers.indexOf(work);
 
         }
     })
-   const modalwoker =document.querySelector('#modal-woker');
-   
-   modaltitle.textContent="Profile";
+    const modalwoker = document.querySelector('#modal-woker');
+
+    modaltitle.textContent = "Profile";
     document.getElementById('assingmodal').style.display = 'flex';
-    modalwoker.innerHTML='';
-    modalwoker.innerHTML=`
+    modalwoker.innerHTML = '';
+    modalwoker.innerHTML = `
      <div class="flex flex-col gap-3">
                     <div class=" p-3"><img src="${workers[index].image}" alt="" width="200" height="200"
                             class="rounded-full border">
@@ -686,13 +735,13 @@ function detailWorker(wid){
                 </div>
     `
 
-    if(workers[index].expirience){
-       
-        let c=1;
-       workers[index].expirience.forEach(expirien =>{
-       
-        
-        modalwoker.children[0].innerHTML+=`
+    if (workers[index].expirience) {
+
+        let c = 1;
+        workers[index].expirience.forEach(expirien => {
+
+
+            modalwoker.children[0].innerHTML += `
           <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
                         <h3 class="Experience rounded-sm bg-gray-400">Experience:${c++}</h3>
                         <p><span class="fontsans">Company:</span>${expirien.company}</p>
@@ -701,37 +750,45 @@ function detailWorker(wid){
                         <p ><span class="fontsans">To:</span>${expirien.dateTo}</p>
                     </div>
         `
-       }) 
+        })
     }
-   
+
 }
+// ======================
 //delettsWorker function
-function delettsWorker(wid,assingine){
-  workers.forEach(work => {
+// ======================
+function delettsWorker(wid, assingine) {
+    workers.forEach(work => {
         if (work.id == wid) {
             index = workers.indexOf(work);
 
         }
     });
-    
-   const workinroom=workers.filter(wrk=>wrk.room==workers[index].room && wrk.id!=workers[index].id);
-   console.log(workinroom);
-   
-   const room=  workers[index].room;
-   workers[index].room=null;
-   
-    show_assig_inroom_2(workinroom,assingine)
+
+    const workinroom = workers.filter(wrk => wrk.room == workers[index].room && wrk.id != workers[index].id);
+    console.log(workinroom);
+
+    const room = workers[index].room;
+    workers[index].room = null;
+
+    show_assig_inroom_2(workinroom, assingine)
     workersna.push(workers[index]);
-    
-   showworker(workersna);
-    handprofileActionClick();    
+
+    showworker(workersna);
+    if(!assingine.children[0]){
+        assingine.parentElement.classList.add("room");
+    }
+    handprofileActionClick();
 }
+// ============================
+//show_assig_inroom_2 function 
+// ============================
 function show_assig_inroom_2(workeras, assingin) {
-    
-    if(workeras.length!=0){
-assingin.innerHTML='';
-workeras.forEach(work=>{  
- assingin.innerHTML += `
+
+    if (workeras.length != 0) {
+        assingin.innerHTML = '';
+        workeras.forEach(work => {
+            assingin.innerHTML += `
             <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
              border-gray-200 w-[40%]" data-btn="details" data-id="${work.id}">
                 <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="30" height="30">
@@ -744,19 +801,21 @@ workeras.forEach(work=>{
             </div> 
 
       `
-})
-   
-   handprofileActionClick();    
+        })
+
+        handprofileActionClick();
+    }
 }
-}
+// ======================
 //searchEworker function
-function searchEworker(){
-    const inputrecherch=document.querySelector('.inputrecherch');
-    inputrecherch.addEventListener('input',()=>{
-    let workerfilter;
-    workerfilter = workersna.filter(work => work.name.toLowerCase().includes((inputrecherch.value).toLowerCase()));
-    showworker(workerfilter);
-     handprofileActionClick();   
+// ======================
+function searchEworker() {
+    const inputrecherch = document.querySelector('.inputrecherch');
+    inputrecherch.addEventListener('input', () => {
+        let workerfilter;
+        workerfilter = workersna.filter(work => work.name.toLowerCase().includes((inputrecherch.value).toLowerCase()));
+        showworker(workerfilter);
+        handprofileActionClick();
 
     })
 }

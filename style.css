@@ -38,6 +38,21 @@
 #assingmodal{
     display: none;
 }
+.worker{
+    width: 30%;
+    height: fit-content;
+}
+.worker img{
+   width: 16%;
+   height: 16%;
+}
+.worker div{
+    width: 20%;
+}
+.worker div p{
+    font-size: 30%;
+}
+
 .fontsans{
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
   margin-right:0.5rem ;
@@ -54,4 +69,7 @@
 }
 section{
     background-size: 100% 100%;
+}
+.room{
+    background-color:rgba(255, 0, 0, 0.5) ;
 }
