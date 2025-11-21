@@ -379,51 +379,120 @@ function assingworker(choix,id) {
     switch (choix) {
         case "conference":
             const conferenceroom = document.getElementById('conference-room-worker');
+            let nobreroomconf=0;
+            workers.forEach(work=>{
+                if(work.room=="conference"){
+                   nobreroomconf++;
+                }
+            })
+            if(nobreroomconf<=3){
             show_assig_inroom(workeras, conferenceroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 4 workers");
+            }
             break;
 
         case "reception":
 
             const receptionroom = document.getElementById('reception-room-worker');
-            show_assig_inroom(workeras, receptionroom,choix);
+             let nobreroomrec=0;
+            workers.forEach(work=>{
+                if(work.room=="reception"){
+                   nobreroomrec++;
+                }
+            })
+            if(nobreroomrec<=2){
+             show_assig_inroom(workeras, receptionroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 3 workers");
+            }
+           
             break;
         case "servers":
-
+            console.log(workers);
+            
             const serversroom = document.getElementById('servers-room-worker');
+             let nobreroomserv=0;
+            workers.forEach(work=>{
+                if(work.room=="servers"){
+                   nobreroomserv++;
+                }
+            })
+            console.log(nobreroomserv);
+            
+            if(nobreroomserv<=2){
             show_assig_inroom(workeras, serversroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 3 workers");
+            }
+           
             break;
         case "security":
 
             const securityroom = document.getElementById('security-room-worker');
-            show_assig_inroom(workeras, securityroom,choix);
+             let nobreroomsecu=0;
+            workers.forEach(work=>{
+                if(work.room=="security"){
+                   nobreroomsecu++;
+                }
+            })
+            if(nobreroomsecu<=2){
+           show_assig_inroom(workeras, securityroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 3 workers");
+            }
+            
             break;
         case "staff":
 
             const staffroom = document.getElementById('staff-room-worker');
-            show_assig_inroom(workeras, staffroom,choix);
+             let nobreroomstaf=0;
+            workers.forEach(work=>{
+                if(work.room=="staff"){
+                   nobreroomstaf++;
+                }
+            })
+            if(nobreroomstaf<=2){
+           show_assig_inroom(workeras, staffroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 3 workers");
+            }
+            
+           
             break;
         case "vault":
 
             const vaultroom = document.getElementById('vault-room-worker');
+             let nobreroomvaul=0;
+            workers.forEach(work=>{
+                if(work.room=="vault"){
+                   nobreroomvaul++;
+                }
+            })
+            if(nobreroomvaul<=2){
             show_assig_inroom(workeras, vaultroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
+            }else{
+                window.alert("Zoon n'accepte pas plus 3 workers");
+            }
+            
             break;
     }
 }
@@ -577,6 +646,7 @@ function editWorker(wid) {
             btnedit.style = "none";
             saveData();
             showworker(workersna);
+             handprofileActionClick(); 
         }
 
     })
@@ -674,3 +744,15 @@ workeras.forEach(work=>{
    handprofileActionClick();    
 }
 }
+//searchEworker function
+function searchEworker(){
+    const inputrecherch=document.querySelector('.inputrecherch');
+    inputrecherch.addEventListener('input',()=>{
+    let workerfilter;
+    workerfilter = workersna.filter(work => work.name.toLowerCase().includes((inputrecherch.value).toLowerCase()));
+    showworker(workerfilter);
+     handprofileActionClick();   
+
+    })
+}
+searchEworker();
