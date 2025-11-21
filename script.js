@@ -53,7 +53,7 @@ btnsaveworker.addEventListener('click', (e) => {
             saveData();
 
             showworker(workersna);
-            handprofileActionClick();
+             handprofileActionClick();
 
             const modal = document.querySelector('.modal');
             modal.style.display = 'none';
@@ -201,7 +201,8 @@ function validationworker(e) {
         image: workerimage.value || "https://avatar.iran.liara.run/public",
         email: workeremail.value,
         telephone: workertele.value,
-        expirience: expiriences
+        expirience: expiriences,
+        room:null
 
     }
     document.getElementById('worker-form').reset();
@@ -295,7 +296,8 @@ function showworker(workerna) {
                         </div>
     `
     })
-     handprofileActionClick();
+    
+    
 }
 
 
@@ -367,7 +369,7 @@ document.getElementById('closeassing').addEventListener('click', () => {
 
 //assingworker function
 function assingworker(choix,id) {
-    console.log(workersna);
+   
 
     const workeras = workersna.filter(work => work.id == Number(id));
 
@@ -377,7 +379,7 @@ function assingworker(choix,id) {
     switch (choix) {
         case "conference":
             const conferenceroom = document.getElementById('conference-room-worker');
-            show_assig_inroom(workeras, conferenceroom);
+            show_assig_inroom(workeras, conferenceroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -386,7 +388,7 @@ function assingworker(choix,id) {
         case "reception":
 
             const receptionroom = document.getElementById('reception-room-worker');
-            show_assig_inroom(workeras, receptionroom);
+            show_assig_inroom(workeras, receptionroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -394,7 +396,7 @@ function assingworker(choix,id) {
         case "servers":
 
             const serversroom = document.getElementById('servers-room-worker');
-            show_assig_inroom(workeras, serversroom);
+            show_assig_inroom(workeras, serversroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -402,7 +404,7 @@ function assingworker(choix,id) {
         case "security":
 
             const securityroom = document.getElementById('security-room-worker');
-            show_assig_inroom(workeras, securityroom);
+            show_assig_inroom(workeras, securityroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -410,7 +412,7 @@ function assingworker(choix,id) {
         case "staff":
 
             const staffroom = document.getElementById('staff-room-worker');
-            show_assig_inroom(workeras, staffroom);
+            show_assig_inroom(workeras, staffroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -418,7 +420,7 @@ function assingworker(choix,id) {
         case "vault":
 
             const vaultroom = document.getElementById('vault-room-worker');
-            show_assig_inroom(workeras, vaultroom);
+            show_assig_inroom(workeras, vaultroom,choix);
             workersna.splice(index, 1);
             showworker(workersna);
             document.getElementById('assingmodal').style.display = 'none';
@@ -426,7 +428,15 @@ function assingworker(choix,id) {
     }
 }
 //show_assig_inroom function
-function show_assig_inroom(workeras, assingin) {
+function show_assig_inroom(workeras, assingin,room) {
+    
+    if(workeras){
+    workeras[0].room=room;
+    workers.forEach(work=>{
+        if(workeras[0].id==work.id){
+            work.room=workeras[0].room;
+        }
+    })
     assingin.innerHTML += `
             <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
              border-gray-200 w-[40%]" data-btn="details" data-id="${workeras[0].id}">
@@ -435,28 +445,41 @@ function show_assig_inroom(workeras, assingin) {
                      <p class="name text-xs">${workeras[0].name}</p>
                     <p class="role text-xs">${workeras[0].role}</p>
                 </div>
-                <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl  flex justify-center items-center
-                 text-white"><span>x</span></button>
+                <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl flex justify-center items-center w-2
+                 text-white dellet"><span  data-btn="dellet" data-id="${workeras[0].id}">x</span></button>
             </div> 
 
       `
       handprofileActionClick();
+}
+      
 }
 
 //handprofileActionClick function
 function handprofileActionClick(){
 const profil = document.querySelectorAll('.profil');
  
-profil.forEach(pro=>{
-    
-    pro.addEventListener('click', (e) =>{
-            console.log("hhhhhh");
-        if( e.target.dataset.btn=="edit"){
-        
+profil.forEach(pro =>{
+
+    pro.addEventListener('click',(e) =>{
+            console.log("hilkjhgoooo2");
+           
+        if( e.target.dataset.btn==="edit"){
+       
             
          const  workerid = e.target.dataset.id;
          editWorker(workerid);
-    }else{
+       }else if( e.target.dataset.btn==="dellet"){
+        
+            const  workerid = e.target.dataset.id;
+            
+            const assingine= e.target.parentElement.parentElement.parentElement;
+            e.target.parentElement.parentElement.remove();
+            
+         delettsWorker(workerid,assingine);
+       }
+       else{
+        
          const  workerid = e.currentTarget.dataset.id;
           detailWorker(workerid);
         }
@@ -545,6 +568,7 @@ function editWorker(wid) {
             let worker = validationworker(e);
             worker.id = workersna[index].id;
             workersna[index] = worker;
+             workers[index] = worker;
 
             btnedit.textContent = "Save worker";
             formltitle.textContent = "Add worker";
@@ -606,4 +630,47 @@ function detailWorker(wid){
        }) 
     }
    
+}
+//delettsWorker function
+function delettsWorker(wid,assingine){
+  workers.forEach(work => {
+        if (work.id == wid) {
+            index = workers.indexOf(work);
+
+        }
+    });
+    
+   const workinroom=workers.filter(wrk=>wrk.room==workers[index].room && wrk.id!=workers[index].id);
+   console.log(workinroom);
+   
+   const room=  workers[index].room;
+   workers[index].room=null;
+   
+    show_assig_inroom_2(workinroom,assingine)
+    workersna.push(workers[index]);
+    
+   showworker(workersna);
+}
+function show_assig_inroom_2(workeras, assingin) {
+    
+    if(workeras.length!=0){
+assingin.innerHTML='';
+workeras.forEach(work=>{  
+ assingin.innerHTML += `
+            <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
+             border-gray-200 w-[40%]" data-btn="details" data-id="${work.id}">
+                <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="30" height="30">
+                <div class="flex flex-col justify-center">
+                     <p class="name text-xs">${work.name}</p>
+                    <p class="role text-xs">${work.role}</p>
+                </div>
+                <button class="btnx m-auto border pl-0.5 pr-0.5 rounded-2xl flex justify-center items-center w-2
+                 text-white dellet"><span  data-btn="dellet" data-id="${work.id}">x</span></button>
+            </div> 
+
+      `
+})
+   
+   handprofileActionClick();    
+}
 }
