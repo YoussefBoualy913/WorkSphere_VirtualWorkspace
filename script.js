@@ -21,6 +21,7 @@ function saveData() {
 // INITIALIZATION
 function init() {
     loadData();
+    workersna=structuredClone(workers);
     showworker(workersna);
     handprofileActionClick();
 
@@ -31,6 +32,9 @@ function init() {
         }
     })
     counteur = maxid + 1;
+     workers.forEach( work=> {
+        work.room=null;
+    })
 }
 document.addEventListener('DOMContentLoaded', init);
 
@@ -720,6 +724,7 @@ function delettsWorker(wid,assingine){
     workersna.push(workers[index]);
     
    showworker(workersna);
+    handprofileActionClick();    
 }
 function show_assig_inroom_2(workeras, assingin) {
     
