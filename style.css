@@ -69,7 +69,107 @@
 }
 section{
     background-size: 100% 100%;
+   
 }
-.room{
+.roombg{
     background-color:rgba(255, 0, 0, 0.5) ;
 }
+.bod_head{
+ font-size: 50px;
+    height: 20%;
+    border-bottom: 2px solid gray;
+    padding: 1rem;
+     display: none;
+}
+
+.header-tit{
+    color: blue;
+    font-weight: bold;
+}
+@media (width<= 1024px) {
+    main{
+  padding: 2rem;
+}
+section{
+background-image: url('Capturewre.png');
+ display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+}
+section div{
+    width: 100%;
+}
+.confrecroom{
+    height: 38%;
+    display: flex;
+    align-items: center;
+    flex-direction:row-reverse;
+}
+.room {
+  height: 100%;
+}
+.conference{
+    width: 50%;
+}
+
+.serv_scur_staf_vau{
+    height: 45.5%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction:row-reverse;
+}
+.serv_scur_staf_vau div{
+ height: 100%;
+}
+
+.serv_secu{
+    width: 34%;
+    display: flex;
+    flex-direction: column;
+}
+.serv_secu div div{
+    height: fit-content;
+}
+.staf_vul{
+     width: 34%;
+      display: flex;
+    flex-direction: column;
+}
+.staf_vul div div {
+  
+    height: fit-content;
+}
+.room{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+     z-index: 100;
+     height: 50%;
+    display:none;
+}
+.app{
+    position: relative;
+}
+.app{
+  width: 100%;
+}
+.isnone{
+    font-size: 50px;
+    height: 20%;
+    border-bottom: 2px solid gray;
+    padding: 1rem;
+    display: block;
+}
+}
+
+.toogle{
+    display: block;
+}
+

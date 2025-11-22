@@ -7,9 +7,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link href="src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+    <header  class="bod_head isnone" >
+        <div class=" flex justify-between p-3 m-4 ">
+        <h2 class="header-tit">WorkSphere </h2>
+        <button class="listworker"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
     <div class="app flex h-screen bg-blue-100">
         <aside id="aside-staff-membres" class=" w-[25%] h-screen overflow-auto  bg-amber-50">
             <div id="staff-membres-contenaire" class="flex flex-col gap-2 h-screen p-7">
@@ -38,12 +45,12 @@
         <main class="h-screen grow p-6">
             <section class="h-full bg-[url(/Capturew.png)] bg-no-repeat  flex justify-between">
 
-                <div class="h-full w-[38.6%]">
+                <div class="confrecroom h-full w-[38.6%]">
 
-                    <div id="conference-room"
-                        class=" w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
+                    <div id="conference-room" data-room="conference"
+                        class="room conference w-full h-[34.5%] flex justify-center items-center flex-col gap-1">
                         <p class="position">conference</p>
-                        <div class="w-full flex justify-center items-center gap-1" id="conference-room-worker">
+                        <div class="w-full flex justify-center items-center gap-1" data-zoon"conference" id="conference-room-worker">
                             <!-- <div class="worker flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
                             <div class="flex flex-col justify-center">
@@ -59,10 +66,10 @@
                             onclick="addworkerroom('conference')">+</button>
                     </div>
 
-                    <div id="reception-room"
-                        class="room w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
+                    <div id="reception-room" data-room="reception"
+                        class="room roombg w-full h-[65.5%] flex justify-center items-center flex-col gap-1">
                         <p class="position">reception</p>
-                        <div class="w-full flex justify-center items-center gap-1" id="reception-room-worker">
+                        <div class="w-full flex justify-center items-center gap-1" data-zoon"reception" id="reception-room-worker">
                             <!-- <div class="worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200 w-[40%]">
                             <img src="124043.png" alt="" class="profil-image rounded-3xl" width="30" height="30">
                             <div class="flex flex-col justify-center">
@@ -79,42 +86,42 @@
                     </div>
                 </div>
 
-                <div class="h-full w-[45.6%] flex flex-col justify-between">
-                    <div class="w-full h-[36%] flex">
-                        <div id="servers-room"
-                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                <div class="serv_scur_staf_vau h-full w-[45.6%] flex flex-col justify-between">
+                    <div class="serv_secu w-full h-[36%] flex">
+                        <div id="servers-room" data-room="servers"
+                            class="room roombg h-full w-[50%] flex justify-center items-center flex-col gap-1">
                             <p class="position">servers</p>
-                            <div class="w-full flex justify-center items-center gap-1" id="servers-room-worker">
+                            <div class="w-full flex justify-center items-center gap-1" data-zoon"servers" id="servers-room-worker">
 
 
                             </div>
                             <button class="text-white w-8 h-8 rounded-md bg-blue-600"
                                 onclick="addworkerroom('servers')">+</button>
                         </div>
-                        <div id="security-room"
-                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="security-room" data-room="security"
+                            class="room roombg h-full w-[50%] flex justify-center items-center flex-col gap-1">
                             <p class="position">security</p>
-                            <div class="w-full flex justify-center items-center gap-1" id="security-room-worker">
+                            <div class="w-full flex justify-center items-center gap-1" data-zoon"security" id="security-room-worker">
 
                             </div>
                             <button class="text-white w-8 h-8 rounded-md bg-blue-600"
                                 onclick="addworkerroom('security')">+</button>
                         </div>
                     </div>
-                    <div class="w-full h-[33%] flex">
-                        <div id="staff-room"
-                            class=" h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                    <div class="staf_vul w-full h-[33%] flex">
+                        <div id="staff-room" data-room="staff"
+                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
                             <p class="position">staff</p>
-                            <div class="w-full flex justify-center items-center gap-1" id="staff-room-worker">
+                            <div class="w-full flex justify-center items-center gap-1" data-zoon"staff" id="staff-room-worker">
 
                             </div>
                             <button class="text-white w-8 h-8 rounded-md bg-blue-600"
                                 onclick="addworkerroom('staff')">+</button>
                         </div>
-                        <div id="vault-room"
-                            class="room h-full w-[50%] flex justify-center items-center flex-col gap-1">
+                        <div id="vault-room" data-room="vault"
+                            class="room roombg h-full w-[50%] flex justify-center items-center flex-col gap-1">
                             <p class="position">vault</p>
-                            <div class="w-full flex justify-center items-center gap-1" id="vault-room-worker">
+                            <div class="w-full flex justify-center items-center gap-1" data-zoon"vault" id="vault-room-worker">
 
                             </div>
                             <button class="text-white w-8 h-8 rounded-md bg-blue-600"

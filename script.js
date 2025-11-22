@@ -412,12 +412,6 @@ document.getElementById('closeassing').addEventListener('click', () => {
 
 function assingworker(choix, id) {
 
-
-    const workeras = workersna.filter(work => work.id == Number(id));
-
-    const index = workersna.indexOf(workeras[0]);
-
-
     switch (choix) {
         case "conference":
             const conferenceroom = document.getElementById('conference-room-worker');
@@ -428,10 +422,8 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomconf <= 3) {
-                show_assig_inroom(workeras, conferenceroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(conferenceroom, choix,id);
+              
             } else {
                 window.alert("Zoon n'accepte pas plus 4 workers");
             }
@@ -447,17 +439,14 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomrec <= 2) {
-                show_assig_inroom(workeras, receptionroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(receptionroom, choix,id);
+                
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
 
             break;
         case "servers":
-            console.log(workers);
 
             const serversroom = document.getElementById('servers-room-worker');
             let nobreroomserv = 0;
@@ -466,13 +455,10 @@ function assingworker(choix, id) {
                     nobreroomserv++;
                 }
             })
-            console.log(nobreroomserv);
 
             if (nobreroomserv <= 2) {
-                show_assig_inroom(workeras, serversroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(serversroom, choix,id);
+               
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -488,10 +474,7 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomsecu <= 2) {
-                show_assig_inroom(workeras, securityroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(securityroom, choix,id);
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -507,10 +490,8 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomstaf <= 2) {
-                show_assig_inroom(workeras, staffroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(staffroom, choix,id);
+            
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -527,10 +508,7 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomvaul <= 2) {
-                show_assig_inroom(workeras, vaultroom, choix);
-                workersna.splice(index, 1);
-                showworker(workersna);
-                document.getElementById('assingmodal').style.display = 'none';
+                show_assig_inroom(vaultroom, choix,id);
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -543,9 +521,13 @@ function assingworker(choix, id) {
 //show_assig_inroom function
 // ===========================
 
-function show_assig_inroom(workeras, assingin, room) {
+function show_assig_inroom(assingin, room ,id) {
 
-    if (workeras) {
+     const workeras = workersna.filter(work => work.id == Number(id));
+    const index = workersna.indexOf(workeras[0]);
+
+
+    
         workeras[0].room = room;
         workers.forEach(work => {
             if (workeras[0].id == work.id) {
@@ -565,9 +547,12 @@ function show_assig_inroom(workeras, assingin, room) {
             </div> 
 
       `
-      assingin.parentElement.classList.remove("room");
+       workersna.splice(index, 1);
+       showworker(workersna);
+       document.getElementById('assingmodal').style.display = 'none';
+       assingin.parentElement.classList.remove("roombg");
         handprofileActionClick();
-    }
+    
 
 }
 // ===============================
@@ -776,7 +761,8 @@ function delettsWorker(wid, assingine) {
 
     showworker(workersna);
     if(!assingine.children[0]){
-        assingine.parentElement.classList.add("room");
+        if(assingine.parentElement.dataset.room !="conference" && assingine.parentElement.dataset.room !="staff")
+        assingine.parentElement.classList.add("roombg");
     }
     handprofileActionClick();
 }
@@ -820,3 +806,8 @@ function searchEworker() {
     })
 }
 searchEworker();
+
+const listworker=document.querySelector('.listworker');
+listworker.addEventListener('click',()=>{
+    document.querySelector('#aside-staff-membres').classList.toggle("toogle");
+})
