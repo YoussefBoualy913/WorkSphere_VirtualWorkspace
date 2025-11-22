@@ -27,7 +27,6 @@ function saveData() {
 
 function init() {
     loadData();
-    workersna = structuredClone(workers);
     showworker(workersna);
     handprofileActionClick();
 
@@ -38,9 +37,7 @@ function init() {
         }
     })
     counteur = maxid + 1;
-    workers.forEach(work => {
-        work.room = null;
-    })
+    Init_showWorker_inroom();
 }
 document.addEventListener('DOMContentLoaded', init);
 
@@ -552,7 +549,7 @@ function show_assig_inroom(assingin, room ,id) {
        document.getElementById('assingmodal').style.display = 'none';
        assingin.parentElement.classList.remove("roombg");
         handprofileActionClick();
-    
+      saveData();
 
 }
 // ===============================
@@ -764,6 +761,7 @@ function delettsWorker(wid, assingine) {
         if(assingine.parentElement.dataset.room !="conference" && assingine.parentElement.dataset.room !="staff")
         assingine.parentElement.classList.add("roombg");
     }
+    saveData();
     handprofileActionClick();
 }
 // ============================
@@ -811,3 +809,18 @@ const listworker=document.querySelector('.listworker');
 listworker.addEventListener('click',()=>{
     document.querySelector('#aside-staff-membres').classList.toggle("toogle");
 })
+// ======================
+//Init_showWorker_inroom function
+// ======================
+function  Init_showWorker_inroom(){
+    const introom=document.querySelectorAll('.room');
+    introom.forEach((zoon)=>{
+        const zoonchild=zoon.children[1];
+        
+        const zoochildworker=workers.filter(work=>zoonchild.dataset.zoon==work.room )
+        console.log(zoochildworker);
+        
+        show_assig_inroom_2(zoochildworker,zoonchild);
+   
+    })
+}

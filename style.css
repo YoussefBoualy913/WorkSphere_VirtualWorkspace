@@ -172,4 +172,7 @@ aside{
 .toogle{
     display: block;
 }
+#aside-staff-membres{
+    min-width: 300px;
+}
 
