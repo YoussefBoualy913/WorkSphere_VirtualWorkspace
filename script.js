@@ -216,7 +216,7 @@ function validationworker(e) {
         id: counteur++,
         name: workername.value,
         role: workerrole.value,
-        image: workerimage.value || "https://avatar.iran.liara.run/public",
+        image: workerimage.value || "https://ui-avatars.com/api/?name="+workername.value,
         email: workeremail.value,
         telephone: workertele.value,
         expirience: expiriences,
@@ -380,7 +380,7 @@ function addworkerroom(room) {
 // =========================
 
 function showWorkerinmodal(ws, choix) {
-    console.log(ws);
+
 
     const modelworker = document.getElementById('modal-woker');
     modelworker.innerHTML = '';
@@ -563,10 +563,16 @@ function handprofileActionClick() {
     const profil = document.querySelectorAll('.profil');
 
     profil.forEach(pro => {
+         pro.removeEventListener('click',handleClick);
+        pro.addEventListener('click',handleClick);
+    })
+}
+//=======================
+//handleClick function
+//=======================
 
-        pro.addEventListener('click', (e) => {
-            console.log("hilkjhgoooo2");
-
+function handleClick (e) {
+    
             if (e.target.dataset.btn === "edit") {
 
 
@@ -587,10 +593,6 @@ function handprofileActionClick() {
                 detailWorker(workerid);
             }
 
-
-
-        })
-    })
 }
 //=======================
 // editWorker function
@@ -738,6 +740,7 @@ function detailWorker(wid) {
         `
         })
     }
+    console.log("hhhhhhhhhhhhhhhhhhh");
 
 }
 // ======================
@@ -753,6 +756,8 @@ function delettsWorker(wid, assingine) {
 
     const workinroom = workers.filter(wrk => wrk.room == workers[index].room && wrk.id != workers[index].id);
     console.log(workinroom);
+    console.log(assingine);
+
 
     const room = workers[index].room;
     workers[index].room = null;
