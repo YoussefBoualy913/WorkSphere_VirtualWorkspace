@@ -85,7 +85,7 @@ document.querySelector('.modal__close').addEventListener('click', () => {
     formltitle.textContent = "Add worker";
     formltitle.style = "none";
     document.querySelector('.cntinaireExpireince').innerHTML = '';
-    modaltitle.textContent = "Select Worker to Assing";
+   
 })
 
 // =========================
@@ -316,7 +316,8 @@ function showworker(workerna) {
 
     workerna.forEach(work => {
         staf.innerHTML += `
-     <div class="profil flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md border-gray-200" data-btn="detaile" data-id="${work.id}">
+     <div class="profil flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
+      border-gray-200" data-btn="detaile" data-id="${work.id}">
                             <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-sm">${work.name}</p>
@@ -401,6 +402,7 @@ function showWorkerinmodal(ws, choix) {
 
 document.getElementById('closeassing').addEventListener('click', () => {
     document.getElementById('assingmodal').style.display = 'none';
+     modaltitle.textContent = "Select Worker to Assing";
 })
 
 // =====================
@@ -419,8 +421,8 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomconf <= 3) {
-                show_assig_inroom(conferenceroom, choix,id);
-              
+                show_assig_inroom(conferenceroom, choix, id);
+
             } else {
                 window.alert("Zoon n'accepte pas plus 4 workers");
             }
@@ -436,8 +438,8 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomrec <= 2) {
-                show_assig_inroom(receptionroom, choix,id);
-                
+                show_assig_inroom(receptionroom, choix, id);
+
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -454,8 +456,8 @@ function assingworker(choix, id) {
             })
 
             if (nobreroomserv <= 2) {
-                show_assig_inroom(serversroom, choix,id);
-               
+                show_assig_inroom(serversroom, choix, id);
+
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -471,7 +473,7 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomsecu <= 2) {
-                show_assig_inroom(securityroom, choix,id);
+                show_assig_inroom(securityroom, choix, id);
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -487,8 +489,8 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomstaf <= 2) {
-                show_assig_inroom(staffroom, choix,id);
-            
+                show_assig_inroom(staffroom, choix, id);
+
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -505,7 +507,7 @@ function assingworker(choix, id) {
                 }
             })
             if (nobreroomvaul <= 2) {
-                show_assig_inroom(vaultroom, choix,id);
+                show_assig_inroom(vaultroom, choix, id);
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -518,20 +520,20 @@ function assingworker(choix, id) {
 //show_assig_inroom function
 // ===========================
 
-function show_assig_inroom(assingin, room ,id) {
+function show_assig_inroom(assingin, room, id) {
 
-     const workeras = workersna.filter(work => work.id == Number(id));
+    const workeras = workersna.filter(work => work.id == Number(id));
     const index = workersna.indexOf(workeras[0]);
 
 
-    
-        workeras[0].room = room;
-        workers.forEach(work => {
-            if (workeras[0].id == work.id) {
-                work.room = workeras[0].room;
-            }
-        })
-        assingin.innerHTML += `
+
+    workeras[0].room = room;
+    workers.forEach(work => {
+        if (workeras[0].id == work.id) {
+            work.room = workeras[0].room;
+        }
+    })
+    assingin.innerHTML += `
             <div class="profil worker flex  p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
              border-gray-200 w-[40%]" data-btn="details" data-id="${workeras[0].id}">
                 <img src="${workeras[0].image}" alt="" class="profil-image rounded-3xl" width="30" height="30">
@@ -544,12 +546,12 @@ function show_assig_inroom(assingin, room ,id) {
             </div> 
 
       `
-       workersna.splice(index, 1);
-       showworker(workersna);
-       document.getElementById('assingmodal').style.display = 'none';
-       assingin.parentElement.classList.remove("roombg");
-        handprofileActionClick();
-      saveData();
+    workersna.splice(index, 1);
+    showworker(workersna);
+    document.getElementById('assingmodal').style.display = 'none';
+    assingin.parentElement.classList.remove("roombg");
+    handprofileActionClick();
+    saveData();
 
 }
 // ===============================
@@ -701,8 +703,8 @@ function detailWorker(wid) {
     document.getElementById('assingmodal').style.display = 'flex';
     modalwoker.innerHTML = '';
     modalwoker.innerHTML = `
-     <div class="flex flex-col gap-3">
-                    <div class=" p-3"><img src="${workers[index].image}" alt="" width="200" height="200"
+     <div class="flex flex-col gap-5">
+                    <div class="ditailimage p-3 flex justify-center"><img src="${workers[index].image}" alt="" width="200" height="200"
                             class="rounded-full border">
                     </div>
                     <div class=" rounded-md p-2 flex flex-col gap-1 bg-gray-200">
@@ -757,9 +759,9 @@ function delettsWorker(wid, assingine) {
     workersna.push(workers[index]);
 
     showworker(workersna);
-    if(!assingine.children[0]){
-        if(assingine.parentElement.dataset.room !="conference" && assingine.parentElement.dataset.room !="staff")
-        assingine.parentElement.classList.add("roombg");
+    if (!assingine.children[0]) {
+        if (assingine.parentElement.dataset.room != "conference" && assingine.parentElement.dataset.room != "staff")
+            assingine.parentElement.classList.add("roombg");
     }
     saveData();
     handprofileActionClick();
@@ -786,7 +788,7 @@ function show_assig_inroom_2(workeras, assingin) {
 
       `
         })
-
+        assingin.parentElement.classList.remove("roombg");
         handprofileActionClick();
     }
 }
@@ -805,22 +807,20 @@ function searchEworker() {
 }
 searchEworker();
 
-const listworker=document.querySelector('.listworker');
-listworker.addEventListener('click',()=>{
+const listworker = document.querySelector('.listworker');
+listworker.addEventListener('click', () => {
     document.querySelector('#aside-staff-membres').classList.toggle("toogle");
 })
 // ======================
 //Init_showWorker_inroom function
 // ======================
-function  Init_showWorker_inroom(){
-    const introom=document.querySelectorAll('.room');
-    introom.forEach((zoon)=>{
-        const zoonchild=zoon.children[1];
-        
-        const zoochildworker=workers.filter(work=>zoonchild.dataset.zoon==work.room )
-        console.log(zoochildworker);
-        
-        show_assig_inroom_2(zoochildworker,zoonchild);
-   
+function Init_showWorker_inroom() {
+    const introom = document.querySelectorAll('.room');
+    introom.forEach((zoon) => {
+        const zoonchild = zoon.children[1];
+
+        const zoochildworker = workers.filter(work => zoonchild.dataset.zoon == work.room);
+        show_assig_inroom_2(zoochildworker, zoonchild);
+
     })
 }
