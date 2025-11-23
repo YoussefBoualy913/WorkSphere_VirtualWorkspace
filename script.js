@@ -316,14 +316,16 @@ function showworker(workerna) {
 
     workerna.forEach(work => {
         staf.innerHTML += `
-     <div class="profil flex p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
+     <div class="profil flex justify-between p-2 border rounded-md gap-3 bg-neutral-50 text-base shadow-md
       border-gray-200" data-btn="detaile" data-id="${work.id}">
+       <div class="flex gap-1.5">
                             <img src="${work.image}" alt="" class="profil-image rounded-3xl" width="40" height="50">
                             <div class="flex flex-col justify-center">
                                 <p class="name text-sm">${work.name}</p>
                                 <p class="role text-xs">${work.role}</p>
                             </div>
-                            <button class="btnedit m-auto text-amber-500" data-btn="edit" data-id="${work.id}">Edit</button>
+                            </div>
+                            <button class="btnedit text-amber-500" data-btn="edit" data-id="${work.id}">Edit</button>
                         </div>
     `
     })
