@@ -426,6 +426,9 @@ function assingworker(choix, id) {
             })
             if (nobreroomconf <= 3) {
                 show_assig_inroom(conferenceroom, choix, id);
+                if(nobreroomconf == 3){
+                      conferenceroom.parentElement.classList.add("roombgg");
+                }
 
             } else {
                 window.alert("Zoon n'accepte pas plus 4 workers");
@@ -443,7 +446,9 @@ function assingworker(choix, id) {
             })
             if (nobreroomrec <= 2) {
                 show_assig_inroom(receptionroom, choix, id);
-
+                if(nobreroomrec == 2){
+                      receptionroom.parentElement.classList.add("roombgg");
+                }
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -461,7 +466,9 @@ function assingworker(choix, id) {
 
             if (nobreroomserv <= 2) {
                 show_assig_inroom(serversroom, choix, id);
-
+            if(nobreroomserv == 2){
+                      serversroom.parentElement.classList.add("roombgg");
+                }
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -478,6 +485,9 @@ function assingworker(choix, id) {
             })
             if (nobreroomsecu <= 2) {
                 show_assig_inroom(securityroom, choix, id);
+                if(nobreroomsecu == 2){
+                      securityroom.parentElement.classList.add("roombgg");
+                }
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -494,6 +504,9 @@ function assingworker(choix, id) {
             })
             if (nobreroomstaf <= 2) {
                 show_assig_inroom(staffroom, choix, id);
+                if(nobreroomstaf == 2){
+                      staffroom.parentElement.classList.add("roombgg");
+                }
 
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
@@ -512,6 +525,9 @@ function assingworker(choix, id) {
             })
             if (nobreroomvaul <= 2) {
                 show_assig_inroom(vaultroom, choix, id);
+                if(nobreroomvaul == 2){
+                      vaultroom.parentElement.classList.add("roombgg");
+                }
             } else {
                 window.alert("Zoon n'accepte pas plus 3 workers");
             }
@@ -525,8 +541,6 @@ function assingworker(choix, id) {
 // ===========================
 
 function show_assig_inroom(assingin, room, id) {
-     console.log(room);
-    console.log(id);
 
     const workeras = workersna.filter(work => work.id == Number(id));
     const index = workersna.findIndex(w => w.id ==id );
@@ -772,6 +786,7 @@ function delettsWorker(wid, assingine) {
         if (assingine.parentElement.dataset.room != "conference" && assingine.parentElement.dataset.room != "staff")
             assingine.parentElement.classList.add("roombg");
     }
+     assingine.parentElement.classList.remove("roombgg");
     saveData();
     handprofileActionClick();
 }
@@ -820,9 +835,9 @@ const listworker = document.querySelector('.listworker');
 listworker.addEventListener('click', () => {
     document.querySelector('#aside-staff-membres').classList.toggle("toogle");
 })
-// ======================
+// ==============================
 //Init_showWorker_inroom function
-// ======================
+// ==============================
 function Init_showWorker_inroom() {
     const introom = document.querySelectorAll('.room');
     introom.forEach((zoon) => {
@@ -830,6 +845,36 @@ function Init_showWorker_inroom() {
 
         const zoochildworker = workers.filter(work => zoonchild.dataset.zoon == work.room);
         show_assig_inroom_2(zoochildworker, zoonchild);
+        if(zoonchild.dataset.zoon=="conference"){
+            if(zoochildworker.length==4){
+                zoon.classList.add("roombgg");
+            }
+        }
+        if(zoonchild.dataset.zoon=="reception"){
+            if(zoochildworker.length==3){
+                zoon.classList.add("roombgg");
+            }
+        }
+         if(zoonchild.dataset.zoon=="servers"){
+            if(zoochildworker.length==3){
+                zoon.classList.add("roombgg");
+            }
+        }
+         if(zoonchild.dataset.zoon=="security"){
+            if(zoochildworker.length==3){
+                zoon.classList.add("roombgg");
+            }
+        }
+         if(zoonchild.dataset.zoon=="staff"){
+            if(zoochildworker.length==3){
+                zoon.classList.add("roombgg");
+            }
+        }
+         if(zoonchild.dataset.zoon=="vault"){
+            if(zoochildworker.length==3){
+                zoon.classList.add("roombgg");
+            }
+        }
 
     })
 }

@@ -76,6 +76,9 @@ section{
 .roombg{
     background-color:rgba(255, 0, 0, 0.3) ;
 }
+.roombgg{
+background-color:rgba(27, 200, 0, 0.3)
+}
 .bod_head{
  font-size: 50px;
     height: 20%;
