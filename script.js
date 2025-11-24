@@ -412,6 +412,8 @@ document.getElementById('closeassing').addEventListener('click', () => {
 // =======================
 
 function assingworker(choix, id) {
+   
+    
 
     switch (choix) {
         case "conference":
@@ -523,11 +525,11 @@ function assingworker(choix, id) {
 // ===========================
 
 function show_assig_inroom(assingin, room, id) {
+     console.log(room);
+    console.log(id);
 
     const workeras = workersna.filter(work => work.id == Number(id));
-    const index = workersna.indexOf(workeras[0]);
-
-
+    const index = workersna.findIndex(w => w.id ==id );
 
     workeras[0].room = room;
     workers.forEach(work => {
@@ -599,13 +601,13 @@ function handleClick (e) {
 //=======================
 
 function editWorker(wid) {
-
-    workersna.forEach(work => {
-        if (work.id == wid) {
-            index = workersna.indexOf(work);
-
-        }
-    })
+ const index = workersna.findIndex(w => w.id ==wid );
+ const index1 = workers.findIndex(w => w.id ==wid );
+ console.log(wid);
+ console.log(index);
+ 
+ 
+    
     const form = document.querySelector('#worker-form');
     const cntinaireExpireince = document.querySelector('.cntinaireExpireince');
 
@@ -675,7 +677,8 @@ function editWorker(wid) {
             let worker = validationworker(e);
             worker.id = workersna[index].id;
             workersna[index] = worker;
-            workers[index] = worker;
+
+            workers[index1] = worker;
 
             btnedit.textContent = "Save worker";
             formltitle.textContent = "Add worker";
@@ -695,12 +698,8 @@ function editWorker(wid) {
 // =======================
 
 function detailWorker(wid) {
-    workers.forEach(work => {
-        if (work.id == wid) {
-            index = workers.indexOf(work);
-
-        }
-    })
+     const index = workers.findIndex(w => w.id ==wid );
+    
     const modalwoker = document.querySelector('#modal-woker');
 
     modaltitle.textContent = "Profile";
@@ -740,25 +739,21 @@ function detailWorker(wid) {
         `
         })
     }
-    console.log("hhhhhhhhhhhhhhhhhhh");
+
 
 }
 // ======================
 //delettsWorker function
 // ======================
 function delettsWorker(wid, assingine) {
-    workers.forEach(work => {
-        if (work.id == wid) {
-            index = workers.indexOf(work);
-
-        }
-    });
-
+   
+    const index = workers.findIndex(w => w.id ==wid );
+   console.log(wid);
+   console.log(index);
+   
     const workinroom = workers.filter(wrk => wrk.room == workers[index].room && wrk.id != workers[index].id);
     console.log(workinroom);
-    console.log(assingine);
-
-
+    
     const room = workers[index].room;
     workers[index].room = null;
 
