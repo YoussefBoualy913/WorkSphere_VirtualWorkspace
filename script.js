@@ -701,6 +701,12 @@ function detailWorker(wid) {
      const index = workers.findIndex(w => w.id ==wid );
     
     const modalwoker = document.querySelector('#modal-woker');
+    let  location;
+    if(workers[index].room != null){
+       location=workers[index].room;
+    }else{
+        location="Unassigned"
+    }
 
     modaltitle.textContent = "Profile";
     document.getElementById('assingmodal').style.display = 'flex';
@@ -716,6 +722,7 @@ function detailWorker(wid) {
                         <p ><span class="fontsans">Role:</span>${workers[index].role}</p>
                         <p ><span class="fontsans">Email:</span>${workers[index].email}</p>
                         <p ><span class="fontsans">Telephone:</span>${workers[index].telephone}</p>
+                        <p ><span class="fontsans">Location:</span>${location}</p>
 
                     </div>
                    
