@@ -56,24 +56,24 @@ function addworker() {
 
 const btnsaveworker = document.querySelector('#saveworker');
 document.querySelector('#add-new-worker').addEventListener('click', addworker)
-btnsaveworker.addEventListener('click', (e) => {
-    if (btnsaveworker.textContent == "Save worker") {
-        const worker = validationworker(e)
-        if (worker) {
+// btnsaveworker.addEventListener('click', (e) => {
+//     if (btnsaveworker.textContent == "Save worker") {
+//         const worker = validationworker(e)
+//         if (worker) {
 
 
-            workers.push(worker);
-            workersna.push(worker);
-            saveData();
+//             workers.push(worker);
+//             workersna.push(worker);
+//             saveData();
 
-            showworker(workersna);
-            handprofileActionClick();
+//             showworker(workersna);
+//             handprofileActionClick();
 
-            const modal = document.querySelector('.modal');
-            modal.style.display = 'none';
-        }
-    }
-})
+//             const modal = document.querySelector('.modal');
+//             modal.style.display = 'none';
+//         }
+//     }
+// })
 const formltitle = document.querySelector('#form-title');
 const modaltitle = document.querySelector('#modal-title');
 document.querySelector('.modal__close').addEventListener('click', () => {
@@ -618,8 +618,6 @@ function editWorker(idw) {
 const wid = Number(idw);
  const index = workersna.findIndex(w => w.id ==wid );
  const index1 = workers.findIndex(w => w.id ==wid );
- console.log(wid);
- console.log(index);
  
     
     const form = document.querySelector('#worker-form');
@@ -685,33 +683,35 @@ const wid = Number(idw);
     btnedit.style.backgroundColor = "orange";
     formltitle.textContent = "Edit worker";
     formltitle.style.color = "orange";
-    btnedit.addEventListener('click', (e) => {
+   
+        function saveeditworker(e){
 
         if (btnedit.textContent == "Edit") {
 
             let worker = validationworker(e);
-            console.log(worker);
-            console.log(workersna[index]);
-            
+           
             
             if(worker){
             worker.id = wid;
-            workersna[index] = structuredClone(worker);
+            workersna[index] = worker;
             
-            workers[index1] =  structuredClone(worker);
+            workers[index1] = worker;
 
             btnedit.textContent = "Save worker";
             formltitle.textContent = "Add worker";
-            formltitle.style = "none";
+            formltitle.style = "";
             modal.style.display = 'none';
             btnedit.style = "none";
             saveData();
             showworker(workersna);
             handprofileActionClick();
+            btnedit.removeEventListener("click", saveeditworker);
             }
         }
+        
+    }
 
-    })
+     btnedit.addEventListener('click',saveeditworker)
 
 }
 // =======================
