@@ -614,12 +614,12 @@ function handleClick (e) {
 // editWorker function
 //=======================
 
-function editWorker(wid) {
+function editWorker(idw) {
+const wid = Number(idw);
  const index = workersna.findIndex(w => w.id ==wid );
  const index1 = workers.findIndex(w => w.id ==wid );
  console.log(wid);
  console.log(index);
- 
  
     
     const form = document.querySelector('#worker-form');
@@ -688,11 +688,17 @@ function editWorker(wid) {
     btnedit.addEventListener('click', (e) => {
 
         if (btnedit.textContent == "Edit") {
-            let worker = validationworker(e);
-            worker.id = workersna[index].id;
-            workersna[index] = worker;
 
-            workers[index1] = worker;
+            let worker = validationworker(e);
+            console.log(worker);
+            console.log(workersna[index]);
+            
+            
+            if(worker){
+            worker.id = wid;
+            workersna[index] = structuredClone(worker);
+            
+            workers[index1] =  structuredClone(worker);
 
             btnedit.textContent = "Save worker";
             formltitle.textContent = "Add worker";
@@ -702,6 +708,7 @@ function editWorker(wid) {
             saveData();
             showworker(workersna);
             handprofileActionClick();
+            }
         }
 
     })
@@ -711,7 +718,8 @@ function editWorker(wid) {
 //detailsWorker function
 // =======================
 
-function detailWorker(wid) {
+function detailWorker(idw) {
+    const wid=Number(idw);
      const index = workers.findIndex(w => w.id ==wid );
     
     const modalwoker = document.querySelector('#modal-woker');
@@ -766,7 +774,8 @@ function detailWorker(wid) {
 // ======================
 //delettsWorker function
 // ======================
-function delettsWorker(wid, assingine) {
+function delettsWorker(idw, assingine) {
+    const wid=Number(idw);
    
     const index = workers.findIndex(w => w.id ==wid );
    console.log(wid);
